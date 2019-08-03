@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".GiveAmount"
+    tools:showIn="@layout/activity_give_amount">
+
+
+    <EditText
+        android:id="@+id/txt_rupees"
+        android:layout_width="249dp"
+        android:layout_height="54dp"
+        android:hint="Add Credit"
+        android:inputType="number"
+        android:text="\u20B9"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.088" />
+
+    <Button
+        android:id="@+id/btn_calender"
+        android:layout_width="226dp"
+        android:layout_height="35dp"
+        android:background="@drawable/btncalender"
+        android:drawableLeft="@drawable/ic_calender"
+        android:drawableRight="@drawable/ic_expand_bellow"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_rupees"
+        app:layout_constraintVertical_bias="0.032" />
+
+
+    <EditText
+        android:id="@+id/add_text"
+        android:layout_width="282dp"
+        android:layout_height="41dp"
+        android:background="@drawable/btncalender"
+        android:drawableLeft="@drawable/ic_create_text"
+        android:drawableRight="@drawable/ic_camera"
+        android:drawablePadding="15dp"
+        android:ems="10"
+        android:hint="Add Note (Optional)"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_calender"
+        app:layout_constraintVertical_bias="0.241" />
+
+    <Button
+        android:id="@+id/conferm_amount"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/ic_check_circle_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.422"
+        app:layout_constraintStart_toEndOf="@+id/add_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.478" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

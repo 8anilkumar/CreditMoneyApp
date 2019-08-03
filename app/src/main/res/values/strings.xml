@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">OkCredit</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Anil Kumar</string>
+    <string name="nav_header_subtitle">9919674820</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_name">name</string>
+    <string name="action_amount">Amount</string>
+    <string name="action_latest">Latest</string>
+    <string name="action_payment_due">Payment Due</string>
+
+    <string name="menu_home">Account</string>
+    <string name="menu_gallery">Help</string>
+    <string name="menu_slideshow">About Us</string>
+    <string name="menu_tools">Privacy Policy</string>
+    <string name="menu_share">Sign Out</string>
+    <string name="title_activity_payment_page">PaymentPage</string>
+    <string name="title_activity_payment__account__data">Payment_Account_Data</string>
+    <string name="title_activity_give_amount">GiveAmount</string>
+    <string name="title_activity_recieve_amount_page">RecieveAmountPage</string>
+    <string name="title_activity_friendlistpagecontact">Friendlistpagecontact</string>
+
+</resources>
