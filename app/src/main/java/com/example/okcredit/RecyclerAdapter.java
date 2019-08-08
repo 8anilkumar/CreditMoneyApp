@@ -5,6 +5,8 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,12 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable {
 
     private LayoutInflater layoutInflater;
     public List<Contacts> cont;
     Contacts list;
     private ArrayList<Contacts> arraylist;
+    private ArrayList<Contacts> arraylistfull;
     boolean checked = false;
 
 
@@ -29,6 +32,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.layoutInflater = inflater;
         this.cont = items;
         this.arraylist = new ArrayList<Contacts>();
+        arraylistfull=new ArrayList<>(arraylist);
         this.arraylist.addAll(cont);
     }
 
@@ -47,6 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         list = cont.get(position);
         String name = cont.get(position).getName();
         String number = cont.get(position).getPhone();
+
         holder.title.setText(cont.get(position).getName());
         holder.phone.setText(cont.get(position).getPhone());
         holder.imageView.setImageResource(list.getImgURL());
@@ -67,7 +72,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return cont.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView phone;
         public ImageView imageView;
@@ -97,6 +102,36 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return position;
     }
 
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
 
+    private Filter exampleFilter=new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<Contacts> filterdList= new ArrayList<>();
+            if(charSequence == null || charSequence.length()==0){
+                filterdList.addAll(arraylistfull);
+            }
+            else{
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for(Contacts item : arraylistfull){
+                    if(item.getName().toLowerCase().contains(filterPattern)){
+                        filterdList.add(item);
+                    }
+                }
+            }
+            FilterResults results=new FilterResults();
+            results.values = filterdList;
+            return results;
+        }
 
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+         arraylist.clear();
+         arraylist.addAll((List) filterResults.values);
+         notifyDataSetChanged();
+        }
+    };
 }

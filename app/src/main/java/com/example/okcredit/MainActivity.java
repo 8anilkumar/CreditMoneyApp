@@ -1,6 +1,7 @@
 package com.example.okcredit;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,16 +35,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
 
         contact_list=(Button)findViewById(R.id.account_user);
         contact_list.setOnClickListener(new View.OnClickListener() {
@@ -106,16 +97,30 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
+            Intent intent=new Intent(MainActivity.this,ActivityHelpPage.class);
+            startActivity(intent);
+           
         } else if (id == R.id.nav_slideshow) {
-
+            openUrl("https://okcredit.in");
+            
         } else if (id == R.id.nav_tools) {
 
-        } else if (id == R.id.nav_share) {
+            Intent intent=new Intent(MainActivity.this,PrivacyPage.class);
+            startActivity(intent);
 
+        } else if (id == R.id.nav_share) {
+            Intent intent=new Intent(MainActivity.this,SignOutPage.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void openUrl(String url) {
+        Uri uri=Uri.parse(url);
+        Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(intent);
     }
 }

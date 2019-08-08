@@ -31,6 +31,7 @@ ImageView back_button;
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Payment_Account_Data.this,GiveAmount.class);
+                intent.putExtra("val", "give");
                 startActivity(intent);
             }
         });
@@ -40,19 +41,11 @@ ImageView back_button;
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Payment_Account_Data.this,RecieveAmountPage.class);
-
+                intent.putExtra("val", "take");
                 startActivity(intent);
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
 
 

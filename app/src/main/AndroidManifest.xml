@@ -14,6 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".LearnHowToUseOkCredit"
+            android:label="@string/title_activity_learn_how_to_use_ok_credit"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SignOutPage" />
+        <activity
+            android:name=".ActivityHelpPage"
+            android:label="@string/title_activity_help_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PrivacyPage" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,9 +51,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

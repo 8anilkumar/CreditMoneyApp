@@ -1,5 +1,6 @@
 package com.example.okcredit;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,9 +15,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class RecieveAmountPage extends AppCompatActivity {
     EditText txtruppes_rec,addtext_rec;
     Button calender_rec,btnconferm_rec;
+    ArrayList<ModelClass> recieve_amountList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,16 +77,19 @@ public class RecieveAmountPage extends AppCompatActivity {
             }
         });
 
-
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        btnconferm_rec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String amountrs= txtruppes_rec.getText().toString();
+                ModelClass modelamount = new ModelClass(amountrs,"left");
+                recieve_amountList.add(modelamount);
+                Intent intent=new Intent(RecieveAmountPage.this,Friendlistpagecontact.class);
+                intent.putExtra("amt",amountrs);
+                intent.putExtra("key","left");
+                startActivity(intent);
             }
         });
+
     }
 
 }

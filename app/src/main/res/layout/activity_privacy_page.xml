@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:padding="30dp"
+    android:orientation="vertical"
+    tools:context=".PrivacyPage">
+
+
+    <ImageView
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        app:srcCompat="@drawable/account" />
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Why my data is online?"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="So that,your data may be recovered when the
+                                                        phone is lost or defective"
+        android:textSize="12dp"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_gravity="center"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=" So that, SMS can be sent for every transaction."
+        android:textSize="12dp"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_gravity="center"
+
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=" Is my data shared with another person
+                                    or organisation?"
+        android:textSize="15dp"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_gravity="center"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="No,we do not share your data with anyone .We use
+                                it to imporve your OkCredit experience."
+        android:textSize="12dp"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    <TextView
+
+        android:layout_gravity="center"
+        android:textColor="#000000"
+        android:textSize="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OkCredit is fully committed to the security of your data!
+                                        "
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/texurl"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:text="@string/agree_terms_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      />
+</LinearLayout>

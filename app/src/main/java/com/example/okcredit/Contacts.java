@@ -3,7 +3,20 @@ package com.example.okcredit;
 public class Contacts {
     String name;
     String phone;
-   int imgURL;
+    String side;
+
+    public String getSide() {
+        return side;
+    }
+
+
+    public Contacts(String name, String side) {
+        this.name = name;
+        this.side = side;
+    }
+    public Contacts(){}
+
+    int imgURL;
 
     public int getImgURL(){
         return imgURL;

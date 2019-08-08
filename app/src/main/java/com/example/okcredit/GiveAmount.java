@@ -12,15 +12,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class GiveAmount extends AppCompatActivity {
 EditText txtruppes,addtext;
 Button calender,btnconferm;
-
+ArrayList<ModelClass> amountList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,20 +84,16 @@ Button calender,btnconferm;
         btnconferm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String amountrs= txtruppes.getText().toString();
+                ModelClass modelamount = new ModelClass(amountrs,"right");
+                amountList.add(modelamount);
                 Intent intent=new Intent(GiveAmount.this,Friendlistpagecontact.class);
+                intent.putExtra("amt",amountrs);
+                intent.putExtra("key","right");
                 startActivity(intent);
             }
         });
 
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
 }
