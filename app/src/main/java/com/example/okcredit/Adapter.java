@@ -1,5 +1,6 @@
 package com.example.okcredit;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,23 +11,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-
     private List<ModelHelpClass> modelHelpClassList;
+    private ClickListener listener;
 
-    public Adapter(List<ModelHelpClass> modelHelpClassList) {
+    public Adapter(List<ModelHelpClass> modelHelpClassList, ClickListener listener) {
         this.modelHelpClassList = modelHelpClassList;
+        this.listener = listener;
+
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-       View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.help_resource_file,viewGroup,false);
-       return  new ViewHolder(view);
+
+        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.help_resource_file, viewGroup, false), listener);
     }
 
     @Override
@@ -35,16 +40,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         int resource = modelHelpClassList.get(position).getImageResource();
         String titleText = modelHelpClassList.get(position).getTitle();
         String SubTitle = modelHelpClassList.get(position).getSubtitle();
-        viewHolder.setData(resource,titleText,SubTitle);
-        viewHolder.contact_select_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "row selected  "+modelHelpClassList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(view.getContext(),LearnHowToUseOkCredit.class);
-                view.getContext().startActivity(intent);
+        viewHolder.setData(resource, titleText, SubTitle);
 
-            }
-        });
+
     }
 
     @Override
@@ -52,26 +50,62 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return modelHelpClassList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         private ImageView imageView;
         private TextView title;
-        private  TextView subtitle;
+        private TextView subtitle;
         public LinearLayout contact_select_layout;
+        public LinearLayout privacy_security;
+        private WeakReference<ClickListener> listenerRef;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, ClickListener listener) {
             super(itemView);
-
+            listenerRef = new WeakReference<>(listener);
             imageView = itemView.findViewById(R.id.img_contact_help);
             title = itemView.findViewById(R.id.txt_tag);
             subtitle = itemView.findViewById(R.id.txt_subtag);
             contact_select_layout = itemView.findViewById(R.id.contact_select_layout);
+            privacy_security = itemView.findViewById(R.id.privacy_security);
+
+            itemView.setOnClickListener(this);
+            title.setOnClickListener(this);
+            imageView.setOnLongClickListener(this);
         }
 
-        private  void setData (int resource, String titleText, String SubTitle){
+        private void setData(int resource, String titleText, String SubTitle) {
             imageView.setImageResource(resource);
             title.setText(titleText);
             subtitle.setText(SubTitle);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == title.getId()) {
+                Toast.makeText(view.getContext(), "ITEM PRESSED = " + String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(view.getContext(), "ITEM PRESSED = " + String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+            }
+            listenerRef.get().onPositionClicked(getAdapterPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setTitle("Hello Dialog")
+                    .setMessage("LONG CLICK DIALOG WINDOW FOR ICON " + String.valueOf(getAdapterPosition()))
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+            builder.create().show();
+            listenerRef.get().onLongClicked(getAdapterPosition());
+            return true;
         }
     }
 }

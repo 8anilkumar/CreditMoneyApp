@@ -34,6 +34,7 @@
         android:drawableRight="@drawable/ic_expand_bellow"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:text="Select date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -43,7 +44,7 @@
 
 
     <EditText
-        android:id="@+id/add_text_recieve"
+        android:id="@+id/add_recieve_discription"
         android:layout_width="282dp"
         android:layout_height="41dp"
         android:background="@drawable/btncalender"

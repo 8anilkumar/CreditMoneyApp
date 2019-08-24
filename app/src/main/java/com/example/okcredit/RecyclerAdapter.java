@@ -1,6 +1,9 @@
 package com.example.okcredit;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable {
 
     private LayoutInflater layoutInflater;
@@ -25,14 +30,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private ArrayList<Contacts> arraylist;
     private ArrayList<Contacts> arraylistfull;
     boolean checked = false;
-
+    Context context;
 
 
     public RecyclerAdapter(LayoutInflater inflater, List<Contacts> items) {
         this.layoutInflater = inflater;
         this.cont = items;
         this.arraylist = new ArrayList<Contacts>();
-        arraylistfull=new ArrayList<>(arraylist);
+        arraylistfull = new ArrayList<>(arraylist);
         this.arraylist.addAll(cont);
     }
 
@@ -49,21 +54,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         list = cont.get(position);
-        String name = cont.get(position).getName();
-        String number = cont.get(position).getPhone();
+
 
         holder.title.setText(cont.get(position).getName());
         holder.phone.setText(cont.get(position).getPhone());
         holder.imageView.setImageResource(list.getImgURL());
+
         holder.contact_select_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "row selected  "+cont.get(position).getName(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(view.getContext(),Payment_Account_Data.class);
+
+                Toast.makeText(view.getContext(), "row selected  " + cont.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), Payment_Account_Data.class);
+                intent.putExtra("name", cont.get(position).getName());
+                intent.putExtra("phone", cont.get(position).getPhone());
                 view.getContext().startActivity(intent);
 
             }
         });
+
     }
 
 
@@ -81,7 +90,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
             this.setIsRecyclable(false);
-            imageView=(ImageView)itemView.findViewById(R.id.img_contact);
+            imageView = (ImageView) itemView.findViewById(R.id.img_contact);
             title = (TextView) itemView.findViewById(R.id.name);
             phone = (TextView) itemView.findViewById(R.id.no);
             contact_select_layout = (LinearLayout) itemView.findViewById(R.id.contact_select_layout);
@@ -89,8 +98,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         }
     }
-
-
 
     @Override
     public long getItemId(int position) {

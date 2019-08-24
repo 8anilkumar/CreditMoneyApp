@@ -4,7 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".SignOutPage">
 
+    <!--<LinearLayout-->
+    <!--android:weightSum="2"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--<Button-->
+    <!--android:layout_marginRight="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/corner_btn"-->
+    <!--android:text="CANCEL"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:textColor="#FFFFFF"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold"/>-->
 
+    <!--<Button-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/corner_btn"-->
+    <!--android:text="SIGN OUT"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:textColor="#FFFFFF"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold"/>-->
+    <!--</LinearLayout>-->
 </LinearLayout>

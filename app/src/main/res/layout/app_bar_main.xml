@@ -18,29 +18,42 @@
             android:background="#33A326"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
 
-            <ImageView
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_account_circle_22"/>
-            <TextView
-                android:layout_marginLeft="5dp"
-                android:textSize="20dp"
-                android:textColor="#FFFFFF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0000000000"/>
-            <ImageView
-                android:layout_marginLeft="25dp"
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_account_balance_black_24dp"/>
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_refresh_black"/>
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_account_circle_22"/>
 
+                <TextView
+                    android:textSize="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0000000000"/>
 
+                <ImageView
+                    android:id="@+id/navigation_home"
+                    android:layout_marginLeft="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_account_balance_black_24dp"/>
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:src="@drawable/ic_refresh_black"/>
+
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

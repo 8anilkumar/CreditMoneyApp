@@ -15,9 +15,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".AccountStatment"
+            android:label="@string/title_activity_account_statment"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".RecordPaymentReceivedFromCustomer"
+            android:label="@string/title_activity_record_payment_received_from_customer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RecordCreditGivenToCustomer"
+            android:label="@string/title_activity_record_credit_given_to_customer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddNewCustomer"
+            android:label="@string/title_activity_add_new_customer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HomePageActivity"
+            android:label="@string/title_activity_home_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityPrivacyAndSecurity"
+            android:label="@string/title_activity_privacy_and_security"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".LearnHowToUseOkCredit"
             android:label="@string/title_activity_learn_how_to_use_ok_credit"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignOutPage" />
         <activity
             android:name=".ActivityHelpPage"

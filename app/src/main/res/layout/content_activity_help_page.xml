@@ -17,6 +17,7 @@
         android:layout_below="@+id/Notice"
          />
 
+
     <LinearLayout
         android:gravity="center"
         android:id="@+id/ll"
@@ -25,11 +26,12 @@
         android:layout_alignParentBottom="true">
 
         <Button
+            android:id="@+id/whatsapp"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:background="#1D4E13"
+            android:background="#41DF21"
             android:drawableLeft="@drawable/whats_app"
             android:drawablePadding="10dp"
             android:gravity="center"

@@ -1,6 +1,8 @@
 package com.example.okcredit;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -20,14 +22,27 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Button contact_list;
+    ImageView home_btn;
+    RecyclerView recyclerView;
+    DatabaseHandler openHelper;
+    SQLiteDatabase sqLiteDatabase;
+    Cursor cursor;
+    String mobileNumber = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +50,21 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Intent intent = getIntent();
+        mobileNumber = intent.getStringExtra("mobile");
+
+
+        home_btn = (ImageView) findViewById(R.id.navigation_home);
+        home_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         contact_list=(Button)findViewById(R.id.account_user);
         contact_list.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +74,36 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+
+//        recyclerView = (RecyclerView) findViewById(R.id.chat_recyclerview);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), recyclerView.VERTICAL, false));
+//
+//        recyclerView.setLayoutManager(layoutManager);
+//        List<ModelClassForAddedCustomer> modelClassForAddedCustomers = new ArrayList<>();
+
+//        openHelper = new DatabaseHandler(getApplicationContext());
+//        sqLiteDatabase = openHelper.getReadableDatabase();
+//
+//        cursor = openHelper.getPaymentInfoByNumber(mobileNumber);
+//        if(cursor.moveToFirst()) {
+//            do {
+//                String name;
+//                name = cursor.getString(4);
+//                ModelClassForAddedCustomer modelClassForAddedCustomer = new ModelClassForAddedCustomer(name);
+//                modelClassForAddedCustomers.add(modelClassForAddedCustomer);
+//            }
+//            while (cursor.moveToNext());
+//        }
+//
+//        AdapterClassAllReadyAddedCustomer adapter = new AdapterClassAllReadyAddedCustomer(modelClassForAddedCustomers);
+//        recyclerView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+//
+
+
+
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -94,7 +154,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
             Intent intent=new Intent(MainActivity.this,ActivityHelpPage.class);

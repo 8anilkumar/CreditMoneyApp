@@ -2,12 +2,16 @@ package com.example.okcredit;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
+import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -31,6 +35,9 @@ public class ContactListPage extends AppCompatActivity {
     Cursor phones;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     SearchView searchView;
+    DatabaseHandler openHelper;
+    SQLiteDatabase sqLiteDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +46,13 @@ public class ContactListPage extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.contacts_list);
         recyclerView.setHasFixedSize(true);
 
+        openHelper = new DatabaseHandler(getApplicationContext());
+        sqLiteDatabase = openHelper.getReadableDatabase();
+
         recyclerView.setLayoutManager(layoutManager);
         selectUsers = new ArrayList<Contacts>();
-        showContacts();
 
+        showContacts();
 
     }
 
@@ -50,9 +60,9 @@ public class ContactListPage extends AppCompatActivity {
         // Check the SDK version and whether the permission is already granted or not.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
-            //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
+
         } else {
-            // Android version is lesser than 6.0 or the permission is already granted.
+
             phones = getApplicationContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
             LoadContact loadContact = new LoadContact();
             loadContact.execute();
@@ -64,7 +74,7 @@ public class ContactListPage extends AppCompatActivity {
                                            int[] grantResults) {
         if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission is granted
+
                 showContacts();
             } else {
                 Toast.makeText(this, "Until you grant the permission, we canot display the names", Toast.LENGTH_SHORT).show();
@@ -100,12 +110,12 @@ public class ContactListPage extends AppCompatActivity {
                     selectUser.setName(name);
                     selectUser.setPhone(phoneNumber);
                     selectUsers.add(selectUser);
-
-
+//
                 }
             } else {
                 Log.e("Cursor close 1", "----------------");
             }
+
 
             return null;
         }
@@ -115,49 +125,57 @@ public class ContactListPage extends AppCompatActivity {
             super.onPostExecute(aVoid);
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // sortContacts();
-            int count=selectUsers.size();
-            ArrayList<Contacts> removed=new ArrayList<>();
-            ArrayList<Contacts> contacts=new ArrayList<>();
-            for(int i=0;i<selectUsers.size();i++){
+            int count = selectUsers.size();
+            ArrayList<Contacts> removed = new ArrayList<>();
+            ArrayList<Contacts> contacts = new ArrayList<>();
+            for (int i = 0; i < selectUsers.size(); i++) {
                 Contacts inviteFriendsProjo = selectUsers.get(i);
 
-                if(inviteFriendsProjo.getName().matches("\\d+(?:\\.\\d+)?")||inviteFriendsProjo.getName().trim().length()==0){
+                if (inviteFriendsProjo.getName().matches("\\d+(?:\\.\\d+)?") || inviteFriendsProjo.getName().trim().length() == 0) {
                     removed.add(inviteFriendsProjo);
                     //Log.d("Removed Contact",new Gson().toJson(inviteFriendsProjo));
-                }
-                else
-                    {
+                } else {
                     contacts.add(inviteFriendsProjo);
                 }
             }
             contacts.addAll(removed);
-            selectUsers=contacts;
+            selectUsers = contacts;
             adapter = new RecyclerAdapter(inflater, selectUsers);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             recyclerView.setAdapter(adapter);
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.menu_menu_example,menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView=(SearchView) searchItem.getActionView();
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_menu_example, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        MenuItem searchViewItem = menu.findItem(R.id.action_search);
+        MenuItem searchItem = (MenuItem) menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                searchView.clearFocus();
+                if (selectUsers.contains(query)) {
+                    adapter.getFilter().filter(query);
+                } else {
+                    Toast.makeText(ContactListPage.this, "No Match Found", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 adapter.getFilter().filter(newText);
                 return false;
             }
         });
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 }
