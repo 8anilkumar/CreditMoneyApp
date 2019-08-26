@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:background="#B9B8B2"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="1dp"
+    android:background="#D5D2CA"
+    android:orientation="vertical"
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_account_circle_black_24dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:src="@drawable/ic_perm_identity_black_24dp"
+            android:text="A"
             android:id="@+id/img_contact_customer"
-            android:layout_width="35dp"
-            android:layout_height="35dp" />
+            android:textSize="45dp"
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:paddingLeft="20dp"
+            android:paddingLeft="15dp"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -31,33 +37,17 @@
                 android:layout_height="wrap_content"
                 android:text="Discription"
                 android:textColor="#0C0C0C"
-                android:textSize="15dp" />
+                android:textSize="18dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
 
                 <ImageView
+                    android:layout_marginTop="5dp"
                     android:id="@+id/status"
                     android:src="@drawable/ic_done_all_black_24dp"
                     android:layout_width="20dp"
                     android:layout_height="20dp" />
 
-                <TextView
-                    android:paddingLeft="10dp"
-                    android:id="@+id/day_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="day"
-                    android:textSize="14dp" />
-            </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#CFCCCC" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,6 +67,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:layout_marginTop="5dp"
                 android:id="@+id/balence_text_status"
                 android:gravity="right"
                 android:layout_gravity="right"
@@ -88,7 +79,11 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#D6D0D0" />
 </LinearLayout>

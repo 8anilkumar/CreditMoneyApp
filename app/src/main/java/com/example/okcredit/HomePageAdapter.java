@@ -18,7 +18,7 @@ import java.util.List;
 import static com.example.okcredit.HomepageModelClass.BALANCE_CHECK;
 import static com.example.okcredit.HomepageModelClass.HOME_PAGE_BOTTOM_SETTING;
 
-public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Homepagebottomsetting> {
+public class HomePageAdapter extends RecyclerView.Adapter {
 
     private List<HomepageModelClass> modelClassList;
     private AccountStatmentInterface accountStatmentInterface;
@@ -45,22 +45,19 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Homepa
 
     @NonNull
     @Override
-    public Homepagebottomsetting onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
         switch (viewType) {
-//            case BALANCE_CHECK:
-//
-//                View balancecheck = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.balance_check,viewGroup,false);
-//                return new Balancecheck(balancecheck);
+            case BALANCE_CHECK:
+
+                View balancecheck = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.balance_check, viewGroup, false);
+                return new Balancecheck(balancecheck);
 
             case HOME_PAGE_BOTTOM_SETTING:
 
-                return new HomePageAdapter.Homepagebottomsetting(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.home_page_bottom_setting, viewGroup, false), (AccountStatmentInterface) accountStatmentInterface);
 
-
-//
-//                View homepagebottomsetting = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.home_page_bottom_setting,viewGroup,false);
-//                return new Homepagebottomsetting(homepagebottomsetting);
+                View homepagebottomsetting = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.home_page_bottom_setting, viewGroup, false);
+                return new Homepagebottomsetting(homepagebottomsetting, accountStatmentInterface);
             default:
                 return null;
         }
@@ -68,15 +65,16 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Homepa
     }
 
 
+
     @Override
-    public void onBindViewHolder(@NonNull Homepagebottomsetting viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         switch (modelClassList.get(position).getViewType()) {
-//            case BALANCE_CHECK:
-//                int imageResource = modelClassList.get(position).getImg_view();
-//                String title = modelClassList.get(position).getTitle();
-//                String Subtitle = modelClassList.get(position).getBalance();
-//                ((Balancecheck)viewHolder).setData(imageResource,title,Subtitle);
-//                break;
+            case BALANCE_CHECK:
+                int imageResource = modelClassList.get(position).getImg_view();
+                String title = modelClassList.get(position).getTitle();
+                String Subtitle = modelClassList.get(position).getBalance();
+                ((Balancecheck) viewHolder).setData(imageResource, title, Subtitle);
+                break;
 
             case HOME_PAGE_BOTTOM_SETTING:
 
@@ -144,10 +142,10 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Homepa
         @Override
         public void onClick(View view) {
             if (view.getId() == bottom_txt.getId()) {
-                Toast.makeText(view.getContext(), "ITEM PRESSED = " + String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "ITEM PRESSED = " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
 
             } else {
-                Toast.makeText(view.getContext(), "ITEM PRESSED = " + String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "ITEM PRESSED = " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
 
             }
             listenerRef.get().onPositionClicked(getAdapterPosition());
@@ -160,7 +158,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Homepa
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
             builder.setTitle("Hello Dialog")
-                    .setMessage("LONG CLICK DIALOG WINDOW FOR ICON " + String.valueOf(getAdapterPosition()))
+                    .setMessage("LONG CLICK DIALOG WINDOW FOR ICON " + getAdapterPosition())
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

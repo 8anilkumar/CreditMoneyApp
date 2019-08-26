@@ -4,7 +4,6 @@ public class Contacts {
     String name;
     String phone;
     String side;
-
     public String getSide() {
         return side;
     }
@@ -14,7 +13,10 @@ public class Contacts {
         this.name = name;
         this.side = side;
     }
-    public Contacts(){}
+
+    public Contacts() {
+
+    }
 
     int imgURL;
 

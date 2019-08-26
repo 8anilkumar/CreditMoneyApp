@@ -1,20 +1,11 @@
 package com.example.okcredit;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,8 +14,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +28,10 @@ public class GiveAmount extends AppCompatActivity {
     EditText txtruppes, adddiscription;
     Button calender, btnconferm;
     DatePickerDialog datePickerDialog;
-    ImageView back;
+    private static final int CAMERA_REQUEST = 500;
+    ImageView back, file, camera_pic;
+    LinearLayout linearLayout;
+
     TextView namee, number;
     List<ModelClass> amountList = new ArrayList<>();
 
@@ -47,13 +45,14 @@ public class GiveAmount extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         openHelper = new DatabaseHandler(this);
 
-        namee = (TextView) findViewById(R.id.name);
-        number = (TextView) findViewById(R.id.number);
+        namee = findViewById(R.id.name);
+        number = findViewById(R.id.number);
 
 
-        back = (ImageView) findViewById(R.id.gopayment);
+        back = findViewById(R.id.gopayment);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,22 +66,42 @@ public class GiveAmount extends AppCompatActivity {
         final String name = intent.getStringExtra("name");
 
 
-        namee.setText((CharSequence) name);
-        number.setText((CharSequence) mobile_num);
+        namee.setText(name);
+        number.setText(mobile_num);
 
 
-        txtruppes = (EditText) findViewById(R.id.txt_rupees);
-        adddiscription = (EditText) findViewById(R.id.add_discription);
-        calender = (Button) findViewById(R.id.btn_calender);
-        btnconferm = (Button) findViewById(R.id.conferm_amount);
+        txtruppes = findViewById(R.id.txt_rupees);
+        adddiscription = findViewById(R.id.add_discription);
+        calender = findViewById(R.id.btn_calender);
+        btnconferm = findViewById(R.id.conferm_amount);
+        linearLayout = findViewById(R.id.add_text_linearLayout);
+        file = findViewById(R.id.add_file);
+        camera_pic = findViewById(R.id.camera);
 
 
+        camera_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
+
+
+        linearLayout.setEnabled(false);
+        file.setEnabled(false);
+        camera_pic.setEnabled(false);
         adddiscription.setEnabled(false);
         calender.setEnabled(false);
         btnconferm.setEnabled(false);
+
         adddiscription.setVisibility(View.GONE);
         calender.setVisibility(View.GONE);
         btnconferm.setVisibility(View.GONE);
+        linearLayout.setVisibility(View.GONE);
+        file.setVisibility(View.GONE);
+        camera_pic.setVisibility(View.GONE);
+
 
         txtruppes.addTextChangedListener(new TextWatcher() {
             @Override
@@ -97,17 +116,31 @@ public class GiveAmount extends AppCompatActivity {
                     adddiscription.setEnabled(false);
                     calender.setEnabled(false);
                     btnconferm.setEnabled(false);
+                    linearLayout.setEnabled(false);
+                    file.setEnabled(false);
+                    camera_pic.setEnabled(false);
+
+
                     adddiscription.setVisibility(View.GONE);
                     calender.setVisibility(View.GONE);
                     btnconferm.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.GONE);
+                    file.setVisibility(View.GONE);
+                    camera_pic.setVisibility(View.GONE);
 
                 } else {
                     adddiscription.setEnabled(true);
                     calender.setEnabled(true);
                     btnconferm.setEnabled(true);
+                    linearLayout.setEnabled(true);
+                    file.setEnabled(true);
+                    camera_pic.setEnabled(true);
                     adddiscription.setVisibility(View.VISIBLE);
                     calender.setVisibility(View.VISIBLE);
                     btnconferm.setVisibility(View.VISIBLE);
+                    linearLayout.setVisibility(View.VISIBLE);
+                    file.setVisibility(View.VISIBLE);
+                    camera_pic.setVisibility(View.VISIBLE);
 
                 }
 
@@ -166,4 +199,6 @@ public class GiveAmount extends AppCompatActivity {
         long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);
         Log.e("Result", id + "");
     }
+
+
 }

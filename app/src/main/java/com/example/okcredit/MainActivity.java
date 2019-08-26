@@ -5,30 +5,23 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
-
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Menu;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     SQLiteDatabase sqLiteDatabase;
     Cursor cursor;
     String mobileNumber = "";
+    TextView number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +45,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent intent = getIntent();
-        mobileNumber = intent.getStringExtra("mobile");
+        number = findViewById(R.id.number);
 
-
-        home_btn = (ImageView) findViewById(R.id.navigation_home);
+        home_btn = findViewById(R.id.navigation_home);
         home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,8 +57,7 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-
-        contact_list=(Button)findViewById(R.id.account_user);
+        contact_list = findViewById(R.id.account_user);
         contact_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,40 +67,51 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-//        recyclerView = (RecyclerView) findViewById(R.id.chat_recyclerview);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), recyclerView.VERTICAL, false));
-//
-//        recyclerView.setLayoutManager(layoutManager);
-//        List<ModelClassForAddedCustomer> modelClassForAddedCustomers = new ArrayList<>();
+        recyclerView = findViewById(R.id.added_customer);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
 
-//        openHelper = new DatabaseHandler(getApplicationContext());
-//        sqLiteDatabase = openHelper.getReadableDatabase();
-//
-//        cursor = openHelper.getPaymentInfoByNumber(mobileNumber);
-//        if(cursor.moveToFirst()) {
-//            do {
-//                String name;
-//                name = cursor.getString(4);
-//                ModelClassForAddedCustomer modelClassForAddedCustomer = new ModelClassForAddedCustomer(name);
-//                modelClassForAddedCustomers.add(modelClassForAddedCustomer);
-//            }
-//            while (cursor.moveToNext());
-//        }
-//
-//        AdapterClassAllReadyAddedCustomer adapter = new AdapterClassAllReadyAddedCustomer(modelClassForAddedCustomers);
-//        recyclerView.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
-//
+        recyclerView.setLayoutManager(layoutManager);
+        List<ModelClassForAddedCustomer> modelClassForAddedCustomers = new ArrayList<>();
+
+        openHelper = new DatabaseHandler(getApplicationContext());
+        sqLiteDatabase = openHelper.getReadableDatabase();
 
 
+        cursor = openHelper.getAllUserData();
+        Toast.makeText(this, "ghfhhfh" + mobileNumber, Toast.LENGTH_SHORT).show();
+        if (cursor.moveToFirst()) {
+            do {
 
+                String name = cursor.getString(0);
+                String status = cursor.getString(1);
+                int totel_money = cursor.getInt(2);
+                String phone = cursor.getString(3);
+                ModelClassForAddedCustomer contacts = new ModelClassForAddedCustomer(name, status, totel_money, phone);
+                modelClassForAddedCustomers.add(contacts);
+            }
+            while (cursor.moveToNext());
+        }
 
+        AdapterClassAllReadyAddedCustomer adapter = new AdapterClassAllReadyAddedCustomer(modelClassForAddedCustomers, new DashbordlistnerClassInterface() {
+            @Override
+            public void onPositionClicked(int position) {
+
+                Intent intent = new Intent(MainActivity.this, Friendlistpagecontact.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClicked(int position) {
+
+            }
+        });
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);

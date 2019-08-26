@@ -16,6 +16,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String User_Name = "user_name";
     public static final String Mobile_Number = "mobile_number";
 
+    public static final String ALL_USER_TABLE = "allusertable";
+    public static final String Totel_Money = "totel_money";
+    public static final String Status = "status";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -27,11 +30,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + Given_Money + " INTEGER ," + Given_Discription + " TEXT,"
                 + Given_Time + " TEXT," + Money_Status + " INTEGER," + User_Name + " TEXT," + Mobile_Number + " TEXT " + ")";
         sqLiteDatabase.execSQL(CREATE_ACTIVITY_TABLE);
+
+
+        String CREATE_ALL_USER_ACTIVITY = "CREATE TABLE " + ALL_USER_TABLE + "(" + User_Name + " TEXT,"
+                + Status + " TEXT," + Totel_Money + " INTEGER," + Mobile_Number + " TEXT " + ")";
+        sqLiteDatabase.execSQL(CREATE_ALL_USER_ACTIVITY);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
+        sqLiteDatabase.execSQL(" DROP TABLE IF EXISTS " + ALL_USER_TABLE);
         onCreate(sqLiteDatabase);
 
     }
@@ -46,5 +55,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor mobile = db.rawQuery("Select * From " + TABLE_NAME + " WHERE " + DatabaseHandler.Mobile_Number + " = '" + mobileNumber + "'", null);
         return mobile;
+    }
+
+    public Cursor getAllUserData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor result = db.rawQuery("Select * From " + ALL_USER_TABLE, null);
+        return result;
     }
 }

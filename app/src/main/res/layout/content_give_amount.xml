@@ -41,38 +41,55 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_rupees"
         app:layout_constraintVertical_bias="0.032" />
 
-
-    <EditText
-        android:id="@+id/add_discription"
-        android:layout_width="282dp"
-        android:layout_height="41dp"
+    <LinearLayout
+        android:id="@+id/add_text_linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/btncalender"
-        android:drawableLeft="@drawable/ic_create_text"
-        android:drawableRight="@drawable/ic_camera"
-        android:drawablePadding="15dp"
-        android:ems="10"
-        android:hint="Add Note (Optional)"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:paddingRight="5dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.218"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_calender"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintVertical_bias="0.241">
+
+        <ImageView
+            android:id="@+id/add_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"
+            android:src="@drawable/ic_create_text" />
+
+        <EditText
+            android:id="@+id/add_discription"
+            android:layout_width="190dp"
+            android:layout_height="41dp"
+            android:ems="10"
+            android:hint="Add Note (Optional)"
+            android:inputType="textPersonName" />
+
+        <ImageView
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="15dp"
+            android:src="@drawable/ic_camera" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/conferm_amount"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginRight="5dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_check_circle_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
-        app:layout_constraintStart_toEndOf="@+id/add_text"
+        app:layout_constraintStart_toEndOf="@+id/add_text_linearLayout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.478" />
 

@@ -58,10 +58,11 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/status_amount"
-            android:layout_gravity="left"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
+            android:id="@+id/received_amount_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:text="amount"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

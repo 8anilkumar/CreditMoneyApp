@@ -30,6 +30,7 @@
                     android:src="@drawable/ic_account_circle_22"/>
 
                 <TextView
+                    android:id="@+id/number"
                     android:textSize="15dp"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center"

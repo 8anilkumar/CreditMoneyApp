@@ -2,17 +2,12 @@ package com.example.okcredit;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +25,14 @@ public class HomePageActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView) findViewById(R.id.home_page);
+        recyclerView = findViewById(R.id.home_page);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), recyclerView.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
 
         recyclerView.setLayoutManager(layoutManager);
         List<HomepageModelClass> homepageModelClasses = new ArrayList<>();
-//        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK,R.drawable.ic_group_black_24dp,"CUSTOMERS","32"));
-//        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK,R.drawable.ic_account_balance_wallet_black,"BALANCE","326566"));
+        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_group_black_24dp, "CUSTOMERS", "32"));
+        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_account_balance_wallet_black, "BALANCE", "326566"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_history_black, "Account Statement"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_file_download_abc, "Download Backup"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_security_black, "Security"));
@@ -48,7 +43,7 @@ public class HomePageActivity extends AppCompatActivity {
         HomePageAdapter homePageAdapter = new HomePageAdapter(homepageModelClasses, new AccountStatmentInterface() {
             @Override
             public void onPositionClicked(int position) {
-                if (position == 0) {
+                if (position == 2) {
                     Intent intent = new Intent(HomePageActivity.this, AccountStatment.class);
                     Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
