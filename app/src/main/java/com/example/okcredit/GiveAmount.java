@@ -65,7 +65,6 @@ public class GiveAmount extends AppCompatActivity {
         final String mobile_num = intent.getStringExtra("number");
         final String name = intent.getStringExtra("name");
 
-
         namee.setText(name);
         number.setText(mobile_num);
 
@@ -143,6 +142,7 @@ public class GiveAmount extends AppCompatActivity {
                     camera_pic.setVisibility(View.VISIBLE);
 
                 }
+
 
             }
 

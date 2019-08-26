@@ -1,11 +1,13 @@
 package com.example.okcredit;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,12 +44,23 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        String name = modelClassForAddedCustomers.get(position).getName();
-        String status = modelClassForAddedCustomers.get(position).getStatus();
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
+        final String name = modelClassForAddedCustomers.get(position).getName();
+        String status = modelClassForAddedCustomers.get(position).getMobile_number();
         int money = modelClassForAddedCustomers.get(position).getTotel_money();
-        //String number = modelClassForAddedCustomers.get(position).getMobile_number();
+        // String number = modelClassForAddedCustomers.get(position).getMobile_number();
         viewHolder.setData(name, status, money);
+        viewHolder.contact_select_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), Friendlistpagecontact.class);
+                intent.putExtra("name", modelClassForAddedCustomers.get(position).getName());
+                intent.putExtra("mobile", modelClassForAddedCustomers.get(position).getMobile_number());
+                view.getContext().startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -63,6 +76,7 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
         private TextView usermoney;
         private TextView userstatus;
         private TextView user_number;
+        public LinearLayout contact_select_layout;
         private WeakReference<DashbordlistnerClassInterface> listenerRef;
 
         public ViewHolder(@NonNull View itemView, DashbordlistnerClassInterface listener) {
@@ -72,8 +86,8 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
             username = itemView.findViewById(R.id.name);
             usermoney = itemView.findViewById(R.id.money_status);
             userstatus = itemView.findViewById(R.id.balence_text_status);
-
             user_number = itemView.findViewById(R.id.number);
+            contact_select_layout = itemView.findViewById(R.id.contact_select);
 
             userIcon.setOnLongClickListener(this);
             itemView.setOnClickListener(this);
@@ -81,9 +95,9 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
 
         }
 
-        private void setData(String name, String status, int moneyr) {
+        private void setData(String name, String number, int money) {
             username.setText(name);
-//            user_number.setText(number);
+            usermoney.setText(number);
 //            userstatus.setText(status);
 //            usermoney.setText(money);
 

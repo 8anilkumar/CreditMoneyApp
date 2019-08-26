@@ -7,24 +7,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Friendlistpagecontact extends AppCompatActivity {
     RecyclerView recyclerView;
-    TextView txtmoney, txtrecieve_money;
+    TextView txtmoney, txtrecieve_money, status;
     Button conferm, conferm_amount_recieve;
     Button give_payment, accept_payment;
     DatabaseHandler openHelper;
@@ -33,7 +33,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
     TextView user_name, user_number;
     Cursor cursor;
     String mobileNumber = "";
-    String name = "";
+    String username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +41,14 @@ public class Friendlistpagecontact extends AppCompatActivity {
         setContentView(R.layout.activity_friendlistpagecontact);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        status = findViewById(R.id.status_amount);
+        user_name = findViewById(R.id.name);
+        user_number = findViewById(R.id.number);
 
-        user_name = (TextView) findViewById(R.id.name);
-        user_number = (TextView) findViewById(R.id.number);
-
-        call = (ImageView) findViewById(R.id.call);
-        send = (ImageView) findViewById(R.id.message);
-        give_payment = (Button) findViewById(R.id.get_payment_money);
-        accept_payment = (Button) findViewById(R.id.accept_payment_money);
+        call = findViewById(R.id.call);
+        send = findViewById(R.id.message);
+        give_payment = findViewById(R.id.get_payment_money);
+        accept_payment = findViewById(R.id.accept_payment_money);
 
 //        backpage=(ImageView) findViewById(R.id.back);
 //        backpage.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +60,12 @@ public class Friendlistpagecontact extends AppCompatActivity {
 //        });
 
         Intent intent = getIntent();
-        mobileNumber = intent.getStringExtra("mobile");
-        name = intent.getStringExtra("name");
 
-        user_name.setText(name);
+        username = intent.getStringExtra("name");
+        mobileNumber = intent.getStringExtra("mobile");
+
+
+        user_name.setText(username);
         user_number.setText(mobileNumber);
 
 
@@ -73,7 +75,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 Intent intent = new Intent(Friendlistpagecontact.this, GiveAmount.class);
                 intent.putExtra("val", 1);
                 intent.putExtra("number", mobileNumber);
-                intent.putExtra("name", name);
+                intent.putExtra("name", username);
                 startActivity(intent);
             }
         });
@@ -85,18 +87,18 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 Intent intent = new Intent(Friendlistpagecontact.this, RecieveAmountPage.class);
                 intent.putExtra("val", 1);
                 intent.putExtra("number", mobileNumber);
-                intent.putExtra("name", name);
+                intent.putExtra("name", username);
                 startActivity(intent);
             }
         });
-        txtmoney = (TextView) findViewById(R.id.txtgive);
-        txtrecieve_money = (TextView) findViewById(R.id.acc_payment);
+        txtmoney = findViewById(R.id.txtgive);
+        txtrecieve_money = findViewById(R.id.acc_payment);
 //        conferm = (Button) findViewById(R.id.conferm_amount);
 //        conferm_amount_recieve = (Button) findViewById(R.id.conferm_amount_recieve);
 
-        recyclerView = (RecyclerView) findViewById(R.id.chat_recyclerview);
+        recyclerView = findViewById(R.id.chat_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), recyclerView.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
 
         recyclerView.setLayoutManager(layoutManager);
         List<ModelClass> modelClasses = new ArrayList<>();
@@ -124,6 +126,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
         }
+
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override

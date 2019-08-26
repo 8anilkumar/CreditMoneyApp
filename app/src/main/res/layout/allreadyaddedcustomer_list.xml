@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginTop="1dp"
-    android:layout_marginBottom="1dp"
+    android:id="@+id/contact_select"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:background="#D5D2CA"
     android:orientation="vertical"
     android:layout_height="wrap_content">
@@ -18,7 +19,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
-            android:src="@drawable/ic_perm_identity_black_24dp"
+            android:src="@drawable/ic_account_circle_black"
             android:text="A"
             android:id="@+id/img_contact_customer"
             android:textSize="45dp"
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:textStyle="bold"
+
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,9 +60,7 @@
                 android:id="@+id/money_status"
                 android:gravity="right"
                 android:layout_gravity="right"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:text="\u20B9"
+                android:textSize="12dp"
                 android:paddingRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -84,6 +83,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:background="#D6D0D0" />
 </LinearLayout>

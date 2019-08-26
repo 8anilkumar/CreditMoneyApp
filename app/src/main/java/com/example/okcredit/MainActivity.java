@@ -45,7 +45,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         number = findViewById(R.id.number);
+
 
         home_btn = findViewById(R.id.navigation_home);
         home_btn.setOnClickListener(new View.OnClickListener() {

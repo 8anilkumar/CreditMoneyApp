@@ -1,6 +1,7 @@
 package com.example.okcredit;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private ArrayList<Contacts> arraylist;
     private ArrayList<Contacts> arraylistfull;
     boolean checked = false;
+    Context context;
 
 
 
