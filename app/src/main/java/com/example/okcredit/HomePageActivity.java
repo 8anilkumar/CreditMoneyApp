@@ -1,7 +1,10 @@
 package com.example.okcredit;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +20,8 @@ import static com.example.okcredit.HomepageModelClass.HOME_PAGE_BOTTOM_SETTING;
 
 public class HomePageActivity extends AppCompatActivity {
     RecyclerView recyclerView;
+    TextView totel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,10 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        totel= (TextView)findViewById(R.id.user);
+
+
+
 
         recyclerView = findViewById(R.id.home_page);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -31,7 +40,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         List<HomepageModelClass> homepageModelClasses = new ArrayList<>();
-        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_group_black_24dp, "CUSTOMERS", "32"));
+        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_group_black_24dp, "CUSTOMERS","32"));
         homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_account_balance_wallet_black, "BALANCE", "326566"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_history_black, "Account Statement"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_file_download_abc, "Download Backup"));
@@ -57,6 +66,10 @@ public class HomePageActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(homePageAdapter);
         homePageAdapter.notifyDataSetChanged();
+//        final SharedPreferences sharedPreferences = getSharedPreferences("USER_CREDENTIALS", Context.MODE_PRIVATE);
+//        final String user = sharedPreferences.getString("TOTEL_USER","DEFAULT_NAME");
+
+
     }
 
 }

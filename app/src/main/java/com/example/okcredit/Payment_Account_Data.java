@@ -60,19 +60,19 @@ ImageView back_button;
                 intent.putExtra("name", name);
                 startActivity(intent);
 
-                insertData(name);
+                //insertData(name);
                 Toast.makeText(Payment_Account_Data.this, "user name is inserted", Toast.LENGTH_SHORT).show();
             }
 
-            private void insertData(String name) {
-
-                SQLiteDatabase db = openHelper.getWritableDatabase();
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(DatabaseHandler.User_Name, name);
-                long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);
-                Log.e("Result", id + "");
-
-            }
+//            private void insertData(String name) {
+//
+//                SQLiteDatabase db = openHelper.getWritableDatabase();
+//                ContentValues contentValues = new ContentValues();
+//                contentValues.put(DatabaseHandler.User_Name, name);
+//                long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);
+//                Log.e("Result", id + "");
+//
+//            }
         });
 
        accept_payment.setOnClickListener(new View.OnClickListener() {

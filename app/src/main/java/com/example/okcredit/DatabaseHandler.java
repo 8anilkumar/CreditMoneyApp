@@ -9,6 +9,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "registration";
     public static final String TABLE_NAME = "okcredit";
+
     public static final String Given_Money = "given_money";
     public static final String Given_Discription = "given_discription";
     public static final String Given_Time = "given_time";

@@ -80,7 +80,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.contact_select_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 insertData(cont.get(position).getName(), "", 0, cont.get(position).getPhone());
 
                 Toast.makeText(view.getContext(), "row selected  " + cont.get(position).getName(), Toast.LENGTH_SHORT).show();

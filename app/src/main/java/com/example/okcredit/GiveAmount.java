@@ -179,6 +179,7 @@ public class GiveAmount extends AppCompatActivity {
                 int paymenttype = 0;
                 String mobile = mobile_num;
                 insertData(amount, discription, paymenttype, mobile);
+
                 Toast.makeText(GiveAmount.this, "data is inserted", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(GiveAmount.this,Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);

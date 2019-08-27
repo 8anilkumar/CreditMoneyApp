@@ -35,6 +35,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
     String mobileNumber = "";
     String username = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

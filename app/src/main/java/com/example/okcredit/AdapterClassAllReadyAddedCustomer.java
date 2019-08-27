@@ -89,9 +89,9 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
             user_number = itemView.findViewById(R.id.number);
             contact_select_layout = itemView.findViewById(R.id.contact_select);
 
-            userIcon.setOnLongClickListener(this);
+
             itemView.setOnClickListener(this);
-            username.setOnClickListener(this);
+            contact_select_layout.setOnClickListener(this);
 
         }
 
@@ -106,7 +106,7 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == username.getId()) {
+            if (view.getId() == contact_select_layout.getId()) {
                 Toast.makeText(view.getContext(), "ITEM PRESSED = " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
 
             } else {

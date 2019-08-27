@@ -1,6 +1,7 @@
 package com.example.okcredit;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -78,7 +79,8 @@ public class MainActivity extends AppCompatActivity
 
         openHelper = new DatabaseHandler(getApplicationContext());
         sqLiteDatabase = openHelper.getReadableDatabase();
-
+        String srtcount = "";
+         int rows = 0;
 
         cursor = openHelper.getAllUserData();
         Toast.makeText(this, "ghfhhfh" + mobileNumber, Toast.LENGTH_SHORT).show();
@@ -91,8 +93,11 @@ public class MainActivity extends AppCompatActivity
                 String phone = cursor.getString(3);
                 ModelClassForAddedCustomer contacts = new ModelClassForAddedCustomer(name, status, totel_money, phone);
                 modelClassForAddedCustomers.add(contacts);
+                rows = (int) cursor.getCount();
+
             }
             while (cursor.moveToNext());
+
         }
 
         AdapterClassAllReadyAddedCustomer adapter = new AdapterClassAllReadyAddedCustomer(modelClassForAddedCustomers, new DashbordlistnerClassInterface() {
@@ -110,6 +115,19 @@ public class MainActivity extends AppCompatActivity
         });
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("USER_CREDENTIALS", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("TOTEL_USER", String.valueOf(rows));
+        editor.commit();
+//
+//        Toast.makeText(this, "totel user"+rows, Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(MainActivity.this,HomePageActivity.class);
+//        intent.putExtra("totel_customer",rows);
+//        startActivity(intent);
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -188,4 +206,5 @@ public class MainActivity extends AppCompatActivity
         Intent intent=new Intent(Intent.ACTION_VIEW,uri);
         startActivity(intent);
     }
+
 }

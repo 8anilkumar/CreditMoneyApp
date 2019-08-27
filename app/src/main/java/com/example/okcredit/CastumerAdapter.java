@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,12 +14,15 @@ import java.util.List;
 
 import static com.example.okcredit.ModelClass.LEFT_SIDE_DATA;
 import static com.example.okcredit.ModelClass.RIGHT_SIDE_DATA;
+import static java.lang.Integer.parseInt;
 
 
 public class CastumerAdapter extends RecyclerView.Adapter {
 
     Context context;
     private List<ModelClass> modelClasses;
+    int i = 0;
+    int j = 0;
 
     public CastumerAdapter(List<ModelClass> modelClasses) {
         this.modelClasses = modelClasses;
@@ -68,15 +72,25 @@ public class CastumerAdapter extends RecyclerView.Adapter {
 
         switch (modelClasses.get(position).getViewType()) {
             case 0:
+
                 String title = modelClasses.get(position).getAmount();
-                String disc = modelClasses.get(position).getDiscription();
-                ((Leftdatacontent) viewHolder).setData(title, disc);
+                String discription = modelClasses.get(position).getDiscription();
+                ((Leftdatacontent) viewHolder).setData(title, discription);
+
+                 for(i=0; i<modelClasses.size();i++){
+                     i=i+parseInt(title);
+                 }
+
                 break;
 
             case 1:
                 String data = modelClasses.get(position).getAmount();
                 String rec_dis = modelClasses.get(position).getDiscription();
                 ((Rightdatacontent) viewHolder).setDatabottom(data, rec_dis);
+
+              for(j=0;j<modelClasses.size();j++){
+                     j=j+parseInt(data);
+                 }
                 break;
 
             default:
@@ -119,7 +133,6 @@ public class CastumerAdapter extends RecyclerView.Adapter {
         }
 
         private void setDatabottom(String title, String received_discription) {
-
             bottom_txt.setText(title);
             res_Discription.setText(received_discription);
         }

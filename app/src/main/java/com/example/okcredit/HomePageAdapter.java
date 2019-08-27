@@ -1,6 +1,9 @@
 package com.example.okcredit;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +22,16 @@ import static com.example.okcredit.HomepageModelClass.BALANCE_CHECK;
 import static com.example.okcredit.HomepageModelClass.HOME_PAGE_BOTTOM_SETTING;
 
 public class HomePageAdapter extends RecyclerView.Adapter {
-
     private List<HomepageModelClass> modelClassList;
     private AccountStatmentInterface accountStatmentInterface;
+
+
+
 
     public HomePageAdapter(List<HomepageModelClass> modelClassList, AccountStatmentInterface accountStatmentInterface) {
         this.modelClassList = modelClassList;
         this.accountStatmentInterface = accountStatmentInterface;
+
     }
 
     @Override
@@ -72,8 +78,8 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             case BALANCE_CHECK:
                 int imageResource = modelClassList.get(position).getImg_view();
                 String title = modelClassList.get(position).getTitle();
-                String Subtitle = modelClassList.get(position).getBalance();
-                ((Balancecheck) viewHolder).setData(imageResource, title, Subtitle);
+                 String subtitle = modelClassList.get(position).getBalance();
+                ((Balancecheck) viewHolder).setData(imageResource, title,subtitle);
                 break;
 
             case HOME_PAGE_BOTTOM_SETTING:
@@ -98,20 +104,21 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         private ImageView imageView;
         private TextView hometitle;
-        private TextView subhometitle;
+        private  TextView subname;
+
+
 
         public Balancecheck(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.img_contact_home);
             hometitle = itemView.findViewById(R.id.txt_home);
-            subhometitle = itemView.findViewById(R.id.txt_subhome);
-
+            subname = itemView.findViewById(R.id.user);
         }
 
-        private void setData(int userImage, String name, String sbname) {
+        private void setData(int userImage, String name ,String subtitle) {
             imageView.setImageResource(userImage);
             hometitle.setText(name);
-            subhometitle.setText(sbname);
+            subname.setText(subtitle);
         }
     }
 
@@ -130,6 +137,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             bottom_txt = itemView.findViewById(R.id.txt_home_bottom_text);
 
             bottom_txt.setOnClickListener(this);
+
         }
 
 
