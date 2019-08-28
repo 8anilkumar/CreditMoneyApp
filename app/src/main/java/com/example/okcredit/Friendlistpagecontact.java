@@ -24,7 +24,9 @@ import java.util.List;
 
 public class Friendlistpagecontact extends AppCompatActivity {
     RecyclerView recyclerView;
-    TextView txtmoney, txtrecieve_money, status;
+    TextView txtmoney;
+    TextView txtrecieve_money;
+    TextView status;
     Button conferm, conferm_amount_recieve;
     Button give_payment, accept_payment;
     DatabaseHandler openHelper;
@@ -34,6 +36,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
     Cursor cursor;
     String mobileNumber = "";
     String username = "";
+    int userstatus = 0;
     int user_totel_amount = 0;
     int totel = 0;
     int user_totel = 0;
@@ -66,6 +69,8 @@ public class Friendlistpagecontact extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra("name");
         mobileNumber = intent.getStringExtra("mobile");
+        userstatus = intent.getIntExtra("new", 0);
+
 
 
         user_name.setText(username);
@@ -113,17 +118,22 @@ public class Friendlistpagecontact extends AppCompatActivity {
         //cursor = openHelper.getAllData();
         cursor = openHelper.getPaymentInfoByNumber(mobileNumber);
         int paymenttype = 0;
-
+        int status = 0;
         if (cursor.moveToFirst()) {
             do {
-                String amount, discription, user_num;
-                //   int status=0;
+                String amount;
+                String discription;
+                String user_num;
+                int time;
+
                 amount = cursor.getString(0);
                 discription = cursor.getString(1);
                 paymenttype = cursor.getInt(2);
                 user_num = cursor.getString(4);
-                //  status = cursor.getInt(5);
-                ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num);
+                status = cursor.getInt(5);
+                time = cursor.getInt(6);
+                Toast.makeText(this, "Time:-" + time, Toast.LENGTH_SHORT).show();
+                ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num, status);
                 modelClasses.add(modelClass);
 
                 if (paymenttype == 0) {

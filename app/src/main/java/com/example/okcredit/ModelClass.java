@@ -14,6 +14,18 @@ public class ModelClass {
     private int status;
 
 
+    private int time;
+
+    public ModelClass(String amount, String discription, int viewType, String mobile, int status) {
+
+        this.amount = amount;
+        this.discription = discription;
+        this.balance = balance;
+        this.viewType = viewType;
+        this.mobile = mobile;
+
+    }
+
     public int getViewType() {
         return viewType;
     }
@@ -24,13 +36,7 @@ public class ModelClass {
 ///LEFT_SIDE_DATA
 
 
-    public int getStatus() {
-        return status;
-    }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public String getMobile() {
         return mobile;
@@ -40,12 +46,12 @@ public class ModelClass {
         this.mobile = mobile;
     }
 
-    public ModelClass(String amount, String discription, int viewType, String mobile) {
-        this.amount = amount;
-        this.discription = discription;
-        this.balance = balance;
+    public ModelClass(String amount, String discription, int viewType, String data, int status, int time) {
+        this.time = time;
+        this.image_view = image_view;
+        this.data = data;
         this.viewType = viewType;
-        this.mobile = mobile;
+
 
     }
 
@@ -81,13 +87,20 @@ public class ModelClass {
     private int image_view;
     private String data;
 
+    public int getStatus() {
+        return status;
+    }
 
-    public ModelClass(int viewType, String data) {
-        this.image_view = image_view;
-        this.data = data;
-        this.viewType = viewType;
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
+    public int getTime() {
+        return time;
+    }
 
+    public void setTime(int time) {
+        this.time = time;
     }
 
 

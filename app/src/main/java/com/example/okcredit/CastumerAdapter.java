@@ -70,16 +70,18 @@ public class CastumerAdapter extends RecyclerView.Adapter {
 
                 String title = modelClasses.get(position).getAmount();
                 String discription = modelClasses.get(position).getDiscription();
-                // int user_sta=modelClasses.get(position).getStatus();
-                ((Leftdatacontent) viewHolder).setData(title, discription);
+                int user_sta = modelClasses.get(position).getStatus();
+                int time = modelClasses.get(position).getTime();
+                ((Leftdatacontent) viewHolder).setData(title, discription, user_sta, time);
 
                 break;
 
             case 1:
                 String data = modelClasses.get(position).getAmount();
                 String rec_dis = modelClasses.get(position).getDiscription();
-                //  int  cus_sta = modelClasses.get(position).getStatus();
-                ((Rightdatacontent) viewHolder).setDatabottom(data, rec_dis);
+                int cus_sta = modelClasses.get(position).getStatus();
+                int receive_time = modelClasses.get(position).getTime();
+                ((Rightdatacontent) viewHolder).setDatabottom(data, rec_dis, cus_sta, receive_time);
 
                 break;
 
@@ -99,18 +101,21 @@ public class CastumerAdapter extends RecyclerView.Adapter {
         private TextView hometitle;
         private TextView dis;
         private TextView user_status;
+        private TextView givetime;
 
         public Leftdatacontent(@NonNull View itemView) {
             super(itemView);
             hometitle = itemView.findViewById(R.id.txtgive);
             dis = itemView.findViewById(R.id.discription);
             user_status = itemView.findViewById(R.id.status_amount);
+            givetime = itemView.findViewById(R.id.amount_given_time);
         }
 
-        private void setData(String name, String discription) {
+        private void setData(String name, String discription, int user_sta, int time) {
             hometitle.setText(name);
             dis.setText(discription);
-            //  user_status.setText(user_crrent);
+            // user_status.setText(user_sta);
+            // givetime.setText(time);
         }
     }
 
@@ -118,6 +123,7 @@ public class CastumerAdapter extends RecyclerView.Adapter {
         private TextView bottom_txt;
         private TextView res_Discription;
         private TextView status;
+        private TextView receive_money_Time;
 
         public Rightdatacontent(@NonNull View itemView) {
             super(itemView);
@@ -125,12 +131,16 @@ public class CastumerAdapter extends RecyclerView.Adapter {
             bottom_txt = itemView.findViewById(R.id.txt_recieve);
             res_Discription = itemView.findViewById(R.id.rec_discription);
             status = itemView.findViewById(R.id.received_amount_status);
+            receive_money_Time = itemView.findViewById(R.id.amount_receive_time);
+
+            // Toast.makeText(itemView.getContext(), "error="+status, Toast.LENGTH_SHORT).show();
         }
 
-        private void setDatabottom(String title, String received_discription) {
+        private void setDatabottom(String title, String received_discription, int cus_sta, int receive_time) {
             bottom_txt.setText(title);
             res_Discription.setText(received_discription);
-            // status.setText(customer_status);
+            //status.setText(cus_sta);
+            //receive_money_Time.setText(receive_time);
         }
     }
 }

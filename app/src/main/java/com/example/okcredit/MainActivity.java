@@ -93,7 +93,8 @@ public class MainActivity extends AppCompatActivity
                 String phone = cursor.getString(3);
                 ModelClassForAddedCustomer contacts = new ModelClassForAddedCustomer(name, status, totel_money, phone);
                 modelClassForAddedCustomers.add(contacts);
-                rows = (int) cursor.getCount();
+                rows = cursor.getCount();
+
 
             }
             while (cursor.moveToNext());

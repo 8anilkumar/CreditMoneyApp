@@ -1,9 +1,6 @@
 package com.example.okcredit;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +21,6 @@ import static com.example.okcredit.HomepageModelClass.HOME_PAGE_BOTTOM_SETTING;
 public class HomePageAdapter extends RecyclerView.Adapter {
     private List<HomepageModelClass> modelClassList;
     private AccountStatmentInterface accountStatmentInterface;
-
-
-
 
     public HomePageAdapter(List<HomepageModelClass> modelClassList, AccountStatmentInterface accountStatmentInterface) {
         this.modelClassList = modelClassList;
@@ -60,7 +54,6 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 return new Balancecheck(balancecheck);
 
             case HOME_PAGE_BOTTOM_SETTING:
-
 
                 View homepagebottomsetting = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.home_page_bottom_setting, viewGroup, false);
                 return new Homepagebottomsetting(homepagebottomsetting, accountStatmentInterface);
