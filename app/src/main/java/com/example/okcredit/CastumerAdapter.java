@@ -1,11 +1,9 @@
 package com.example.okcredit;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,15 +12,12 @@ import java.util.List;
 
 import static com.example.okcredit.ModelClass.LEFT_SIDE_DATA;
 import static com.example.okcredit.ModelClass.RIGHT_SIDE_DATA;
-import static java.lang.Integer.parseInt;
 
 
 public class CastumerAdapter extends RecyclerView.Adapter {
 
-    Context context;
+
     private List<ModelClass> modelClasses;
-    int i = 0;
-    int j = 0;
 
     public CastumerAdapter(List<ModelClass> modelClasses) {
         this.modelClasses = modelClasses;
@@ -75,22 +70,17 @@ public class CastumerAdapter extends RecyclerView.Adapter {
 
                 String title = modelClasses.get(position).getAmount();
                 String discription = modelClasses.get(position).getDiscription();
+                // int user_sta=modelClasses.get(position).getStatus();
                 ((Leftdatacontent) viewHolder).setData(title, discription);
-
-                 for(i=0; i<modelClasses.size();i++){
-                     i=i+parseInt(title);
-                 }
 
                 break;
 
             case 1:
                 String data = modelClasses.get(position).getAmount();
                 String rec_dis = modelClasses.get(position).getDiscription();
+                //  int  cus_sta = modelClasses.get(position).getStatus();
                 ((Rightdatacontent) viewHolder).setDatabottom(data, rec_dis);
 
-              for(j=0;j<modelClasses.size();j++){
-                     j=j+parseInt(data);
-                 }
                 break;
 
             default:
@@ -108,33 +98,39 @@ public class CastumerAdapter extends RecyclerView.Adapter {
 
         private TextView hometitle;
         private TextView dis;
+        private TextView user_status;
 
         public Leftdatacontent(@NonNull View itemView) {
             super(itemView);
             hometitle = itemView.findViewById(R.id.txtgive);
             dis = itemView.findViewById(R.id.discription);
+            user_status = itemView.findViewById(R.id.status_amount);
         }
 
         private void setData(String name, String discription) {
             hometitle.setText(name);
             dis.setText(discription);
+            //  user_status.setText(user_crrent);
         }
     }
 
     class Rightdatacontent extends RecyclerView.ViewHolder {
         private TextView bottom_txt;
         private TextView res_Discription;
+        private TextView status;
 
         public Rightdatacontent(@NonNull View itemView) {
             super(itemView);
 
             bottom_txt = itemView.findViewById(R.id.txt_recieve);
             res_Discription = itemView.findViewById(R.id.rec_discription);
+            status = itemView.findViewById(R.id.received_amount_status);
         }
 
         private void setDatabottom(String title, String received_discription) {
             bottom_txt.setText(title);
             res_Discription.setText(received_discription);
+            // status.setText(customer_status);
         }
     }
 }

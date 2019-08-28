@@ -64,7 +64,8 @@ public class GiveAmount extends AppCompatActivity {
         Intent intent = getIntent();
         final String mobile_num = intent.getStringExtra("number");
         final String name = intent.getStringExtra("name");
-
+        final int userdata = intent.getIntExtra("user", 0);
+        Toast.makeText(this, "code=" + userdata, Toast.LENGTH_SHORT).show();
         namee.setText(name);
         number.setText(mobile_num);
 
@@ -179,7 +180,6 @@ public class GiveAmount extends AppCompatActivity {
                 int paymenttype = 0;
                 String mobile = mobile_num;
                 insertData(amount, discription, paymenttype, mobile);
-
                 Toast.makeText(GiveAmount.this, "data is inserted", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(GiveAmount.this,Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);
@@ -197,6 +197,8 @@ public class GiveAmount extends AppCompatActivity {
         contentValues.put(DatabaseHandler.Given_Discription, discription);
         contentValues.put(DatabaseHandler.Money_Status, paymenttype);
         contentValues.put(DatabaseHandler.Mobile_Number, mobile);
+        //    contentValues.put(DatabaseHandler.Given_Time, userdata);
+
         long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);
         Log.e("Result", id + "");
     }

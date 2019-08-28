@@ -11,6 +11,7 @@ public class ModelClass {
     private String balance;
     private String discription;
     private String mobile;
+    private int status;
 
 
     public int getViewType() {
@@ -22,6 +23,14 @@ public class ModelClass {
     }
 ///LEFT_SIDE_DATA
 
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getMobile() {
         return mobile;

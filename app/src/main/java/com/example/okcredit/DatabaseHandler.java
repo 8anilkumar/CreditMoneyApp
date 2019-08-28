@@ -29,7 +29,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CREATE_ACTIVITY_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + Given_Money + " INTEGER ," + Given_Discription + " TEXT,"
-                + Given_Time + " TEXT," + Money_Status + " INTEGER," + User_Name + " TEXT," + Mobile_Number + " TEXT " + ")";
+                + Money_Status + " INTEGER," + User_Name + " TEXT," + Mobile_Number + " TEXT ," + Given_Time + " INTEGER " + ")";
         sqLiteDatabase.execSQL(CREATE_ACTIVITY_TABLE);
 
 

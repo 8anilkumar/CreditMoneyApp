@@ -34,7 +34,10 @@ public class Friendlistpagecontact extends AppCompatActivity {
     Cursor cursor;
     String mobileNumber = "";
     String username = "";
-
+    int user_totel_amount = 0;
+    int totel = 0;
+    int user_totel = 0;
+    int customer_totel_amount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,6 @@ public class Friendlistpagecontact extends AppCompatActivity {
 //        });
 
         Intent intent = getIntent();
-
         username = intent.getStringExtra("name");
         mobileNumber = intent.getStringExtra("mobile");
 
@@ -74,9 +76,10 @@ public class Friendlistpagecontact extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Friendlistpagecontact.this, GiveAmount.class);
-                intent.putExtra("val", 1);
                 intent.putExtra("number", mobileNumber);
                 intent.putExtra("name", username);
+                intent.putExtra("user", totel);
+                Toast.makeText(Friendlistpagecontact.this, "user" + totel, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
@@ -86,9 +89,10 @@ public class Friendlistpagecontact extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Friendlistpagecontact.this, RecieveAmountPage.class);
-                intent.putExtra("val", 1);
                 intent.putExtra("number", mobileNumber);
                 intent.putExtra("name", username);
+                intent.putExtra("user", user_totel);
+                Toast.makeText(Friendlistpagecontact.this, "customer" + user_totel, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
@@ -109,18 +113,48 @@ public class Friendlistpagecontact extends AppCompatActivity {
         //cursor = openHelper.getAllData();
         cursor = openHelper.getPaymentInfoByNumber(mobileNumber);
         int paymenttype = 0;
+
         if (cursor.moveToFirst()) {
             do {
                 String amount, discription, user_num;
+                //   int status=0;
                 amount = cursor.getString(0);
                 discription = cursor.getString(1);
-                paymenttype = cursor.getInt(3);
-                user_num = cursor.getString(5);
+                paymenttype = cursor.getInt(2);
+                user_num = cursor.getString(4);
+                //  status = cursor.getInt(5);
                 ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num);
                 modelClasses.add(modelClass);
 
+                if (paymenttype == 0) {
+                    int count = Integer.parseInt(amount);
+                    user_totel_amount = user_totel_amount + count;
+                } else {
+                    int count = Integer.parseInt(amount);
+                    customer_totel_amount = customer_totel_amount + count;
+                }
+
             }
             while (cursor.moveToNext());
+
+            if (user_totel_amount > customer_totel_amount) {
+                totel = user_totel_amount - customer_totel_amount;
+                Toast.makeText(this, "Deo_amount" + totel, Toast.LENGTH_SHORT).show();
+//                Intent intent1=new Intent(Friendlistpagecontact.this,GiveAmount.class);
+//                intent.putExtra("number", mobileNumber);
+//                intent.putExtra("name", username);
+//                intent.putExtra("user", totel);
+//                startActivity(intent1);
+
+            } else {
+                user_totel = customer_totel_amount - user_totel_amount;
+                Toast.makeText(this, "Advance_amount" + user_totel, Toast.LENGTH_SHORT).show();
+//                Intent intent2=new Intent(Friendlistpagecontact.this,RecieveAmountPage.class);
+//                intent.putExtra("number", mobileNumber);
+//                intent.putExtra("name", username);
+//                intent.putExtra("user", user_totel);
+//                startActivity(intent2);
+            }
 
             CastumerAdapter adapter = new CastumerAdapter(modelClasses);
             recyclerView.setAdapter(adapter);

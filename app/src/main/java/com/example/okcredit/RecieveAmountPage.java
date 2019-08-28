@@ -5,13 +5,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,6 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import java.util.ArrayList;
 
 public class RecieveAmountPage extends AppCompatActivity {
@@ -30,7 +26,6 @@ public class RecieveAmountPage extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     TextView namee, number;
     ArrayList<ModelClass> recieve_amountList = new ArrayList<>();
-
     DatabaseHandler openHelper;
     SQLiteDatabase sqLiteDatabase;
     @Override
@@ -41,20 +36,22 @@ public class RecieveAmountPage extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         openHelper = new DatabaseHandler(this);
-        namee = (TextView) findViewById(R.id.name);
-        number = (TextView) findViewById(R.id.number);
+        namee = findViewById(R.id.name);
+        number = findViewById(R.id.number);
 
         Intent intent = getIntent();
         final String mobile_num = intent.getStringExtra("number");
         final String name = intent.getStringExtra("name");
+        final int customer = intent.getIntExtra("user", 0);
+        Toast.makeText(this, "abcd:=" + customer, Toast.LENGTH_SHORT).show();
 
-        namee.setText((CharSequence) name);
-        number.setText((CharSequence) mobile_num);
+        namee.setText(name);
+        number.setText(mobile_num);
 
-        txtruppes_rec = (EditText) findViewById(R.id.txt_recieve);
-        addtext_rec = (EditText) findViewById(R.id.add_recieve_discription);
-        calender_rec = (Button) findViewById(R.id.btn_calender_recieve);
-        btnconferm_rec = (Button) findViewById(R.id.conferm_amount_recieve);
+        txtruppes_rec = findViewById(R.id.txt_recieve);
+        addtext_rec = findViewById(R.id.add_recieve_discription);
+        calender_rec = findViewById(R.id.btn_calender_recieve);
+        btnconferm_rec = findViewById(R.id.conferm_amount_recieve);
 
         addtext_rec.setEnabled(false);
         calender_rec.setEnabled(false);
@@ -118,7 +115,7 @@ public class RecieveAmountPage extends AppCompatActivity {
                 String discription = addtext_rec.getText().toString();
                 int paymenttype = 1;
                 String mobile = mobile_num;
-
+                //String customer_status = customer;
                 insertData(amount, discription, paymenttype, mobile);
                 Toast.makeText(RecieveAmountPage.this, "data is inserted", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RecieveAmountPage.this, Friendlistpagecontact.class);
@@ -137,6 +134,7 @@ public class RecieveAmountPage extends AppCompatActivity {
         contentValues.put(DatabaseHandler.Given_Discription, discription);
         contentValues.put(DatabaseHandler.Money_Status, paymenttype);
         contentValues.put(DatabaseHandler.Mobile_Number, mobile);
+        //  contentValues.put(DatabaseHandler.Given_Time, customer);
         long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);
         Log.e("Result", id + "");
 
