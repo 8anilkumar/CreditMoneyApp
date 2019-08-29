@@ -12,15 +12,14 @@ public class ModelClass {
     private String discription;
     private String mobile;
     private int status;
-
-
     private int time;
 
     public ModelClass(String amount, String discription, int viewType, String mobile, int status) {
 
         this.amount = amount;
         this.discription = discription;
-        this.balance = balance;
+        //this.balance = balance;
+        this.status = status;
         this.viewType = viewType;
         this.mobile = mobile;
 
@@ -46,7 +45,7 @@ public class ModelClass {
         this.mobile = mobile;
     }
 
-    public ModelClass(String amount, String discription, int viewType, String data, int status, int time) {
+    public ModelClass(String amount, String discription, int viewType, String data, String status, int time) {
         this.time = time;
         this.image_view = image_view;
         this.data = data;

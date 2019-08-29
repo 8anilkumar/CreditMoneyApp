@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,9 +80,7 @@ public class MainActivity extends AppCompatActivity
         sqLiteDatabase = openHelper.getReadableDatabase();
         String srtcount = "";
          int rows = 0;
-
         cursor = openHelper.getAllUserData();
-        Toast.makeText(this, "ghfhhfh" + mobileNumber, Toast.LENGTH_SHORT).show();
         if (cursor.moveToFirst()) {
             do {
 

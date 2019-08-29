@@ -84,7 +84,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 intent.putExtra("number", mobileNumber);
                 intent.putExtra("name", username);
                 intent.putExtra("user", totel);
-                Toast.makeText(Friendlistpagecontact.this, "user" + totel, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Friendlistpagecontact.this, "user" + totel, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
@@ -96,8 +96,8 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 Intent intent = new Intent(Friendlistpagecontact.this, RecieveAmountPage.class);
                 intent.putExtra("number", mobileNumber);
                 intent.putExtra("name", username);
-                intent.putExtra("user", user_totel);
-                Toast.makeText(Friendlistpagecontact.this, "customer" + user_totel, Toast.LENGTH_SHORT).show();
+                intent.putExtra("receiver", user_totel);
+//                Toast.makeText(Friendlistpagecontact.this, "customer" + user_totel, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
@@ -118,21 +118,20 @@ public class Friendlistpagecontact extends AppCompatActivity {
         //cursor = openHelper.getAllData();
         cursor = openHelper.getPaymentInfoByNumber(mobileNumber);
         int paymenttype = 0;
-        int status = 0;
+        int time = 0;
         if (cursor.moveToFirst()) {
             do {
                 String amount;
                 String discription;
                 String user_num;
-                int time;
-
+                int status;
                 amount = cursor.getString(0);
                 discription = cursor.getString(1);
                 paymenttype = cursor.getInt(2);
                 user_num = cursor.getString(4);
                 status = cursor.getInt(5);
                 time = cursor.getInt(6);
-                Toast.makeText(this, "Time:-" + time, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Status:-" + status, Toast.LENGTH_SHORT).show();
                 ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num, status);
                 modelClasses.add(modelClass);
 
@@ -149,21 +148,12 @@ public class Friendlistpagecontact extends AppCompatActivity {
 
             if (user_totel_amount > customer_totel_amount) {
                 totel = user_totel_amount - customer_totel_amount;
-                Toast.makeText(this, "Deo_amount" + totel, Toast.LENGTH_SHORT).show();
-//                Intent intent1=new Intent(Friendlistpagecontact.this,GiveAmount.class);
-//                intent.putExtra("number", mobileNumber);
-//                intent.putExtra("name", username);
-//                intent.putExtra("user", totel);
-//                startActivity(intent1);
+                Toast.makeText(this, "Due_amount" + totel, Toast.LENGTH_SHORT).show();
 
             } else {
                 user_totel = customer_totel_amount - user_totel_amount;
                 Toast.makeText(this, "Advance_amount" + user_totel, Toast.LENGTH_SHORT).show();
-//                Intent intent2=new Intent(Friendlistpagecontact.this,RecieveAmountPage.class);
-//                intent.putExtra("number", mobileNumber);
-//                intent.putExtra("name", username);
-//                intent.putExtra("user", user_totel);
-//                startActivity(intent2);
+
             }
 
             CastumerAdapter adapter = new CastumerAdapter(modelClasses);

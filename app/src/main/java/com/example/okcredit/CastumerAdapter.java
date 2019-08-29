@@ -71,6 +71,7 @@ public class CastumerAdapter extends RecyclerView.Adapter {
                 String title = modelClasses.get(position).getAmount();
                 String discription = modelClasses.get(position).getDiscription();
                 int user_sta = modelClasses.get(position).getStatus();
+//                Toast.makeText(viewHolder.itemView.getContext(), "money  r"+user_sta, Toast.LENGTH_SHORT).show();
                 int time = modelClasses.get(position).getTime();
                 ((Leftdatacontent) viewHolder).setData(title, discription, user_sta, time);
 
@@ -81,6 +82,8 @@ public class CastumerAdapter extends RecyclerView.Adapter {
                 String rec_dis = modelClasses.get(position).getDiscription();
                 int cus_sta = modelClasses.get(position).getStatus();
                 int receive_time = modelClasses.get(position).getTime();
+//                Toast.makeText(viewHolder.itemView.getContext(), "money  l"+cus_sta, Toast.LENGTH_SHORT).show();
+
                 ((Rightdatacontent) viewHolder).setDatabottom(data, rec_dis, cus_sta, receive_time);
 
                 break;
@@ -111,11 +114,11 @@ public class CastumerAdapter extends RecyclerView.Adapter {
             givetime = itemView.findViewById(R.id.amount_given_time);
         }
 
-        private void setData(String name, String discription, int user_sta, int time) {
-            hometitle.setText(name);
+        private void setData(String amount, String discription, int user_sta, int time) {
+            hometitle.setText(amount);
             dis.setText(discription);
-            // user_status.setText(user_sta);
-            // givetime.setText(time);
+            user_status.setText(user_sta + "");
+            givetime.setText(String.valueOf(time));
         }
     }
 
@@ -133,14 +136,14 @@ public class CastumerAdapter extends RecyclerView.Adapter {
             status = itemView.findViewById(R.id.received_amount_status);
             receive_money_Time = itemView.findViewById(R.id.amount_receive_time);
 
-            // Toast.makeText(itemView.getContext(), "error="+status, Toast.LENGTH_SHORT).show();
         }
 
         private void setDatabottom(String title, String received_discription, int cus_sta, int receive_time) {
             bottom_txt.setText(title);
             res_Discription.setText(received_discription);
-            //status.setText(cus_sta);
-            //receive_money_Time.setText(receive_time);
+            status.setText(cus_sta + "");
+            //Toast.makeText(, "", Toast.LENGTH_SHORT).show();
+            receive_money_Time.setText(String.valueOf(receive_time));
         }
     }
 }

@@ -67,7 +67,7 @@ public class GiveAmount extends AppCompatActivity {
         final String mobile_num = intent.getStringExtra("number");
         final String name = intent.getStringExtra("name");
         final int userdata = intent.getIntExtra("user", 0);
-        Toast.makeText(this, "code=" + userdata, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "User" + userdata, Toast.LENGTH_SHORT).show();
         namee.setText(name);
         number.setText(mobile_num);
 
@@ -183,27 +183,26 @@ public class GiveAmount extends AppCompatActivity {
                 String amount = txtruppes.getText().toString();
                 String discription = adddiscription.getText().toString();
                 int paymenttype = 0;
+                String rupee = String.valueOf(userdata);
                 String mobile = mobile_num;
-                insertData(amount, discription, paymenttype, mobile, userdata, time);
-                Toast.makeText(GiveAmount.this, "data is inserted", Toast.LENGTH_SHORT).show();
+                insertData(amount, discription, paymenttype, mobile, rupee, time);
                 Intent intent=new Intent(GiveAmount.this,Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);
                 intent.putExtra("name", name);
-                intent.putExtra("new", userdata);
                 startActivity(intent);
 
             }
         });
     }
 
-    public void insertData(String amount, String discription, int paymenttype, String mobile, int userdata, String time) {
+    public void insertData(String amount, String discription, int paymenttype, String mobile, String rupee, String time) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHandler.Given_Money, amount);
         contentValues.put(DatabaseHandler.Given_Discription, discription);
         contentValues.put(DatabaseHandler.Money_Status, paymenttype);
         contentValues.put(DatabaseHandler.Mobile_Number, mobile);
-        contentValues.put(DatabaseHandler.Given_Time, userdata);
+        contentValues.put(DatabaseHandler.Given_Time, rupee);
         contentValues.put(DatabaseHandler.Give_Curren_Time, time);
 
         long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);

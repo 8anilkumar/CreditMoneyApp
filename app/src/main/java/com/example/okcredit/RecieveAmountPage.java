@@ -44,8 +44,8 @@ public class RecieveAmountPage extends AppCompatActivity {
         Intent intent = getIntent();
         final String mobile_num = intent.getStringExtra("number");
         final String name = intent.getStringExtra("name");
-        final int customer = intent.getIntExtra("user", 0);
-        Toast.makeText(this, "abcd:=" + customer, Toast.LENGTH_SHORT).show();
+        final int customer = intent.getIntExtra("receiver", 0);
+        Toast.makeText(this, "Customer=" + customer, Toast.LENGTH_SHORT).show();
 
         namee.setText(name);
         number.setText(mobile_num);
@@ -119,9 +119,10 @@ public class RecieveAmountPage extends AppCompatActivity {
                 String amount = txtruppes_rec.getText().toString();
                 String discription = addtext_rec.getText().toString();
                 int paymenttype = 1;
+                String receive_rupee = String.valueOf(customer);
                 String mobile = mobile_num;
-                //String customer_status = customer;
-                insertData(amount, discription, paymenttype, mobile, customer, rece_time);
+                int customer_status = customer;
+                insertData(amount, discription, paymenttype, mobile, receive_rupee, rece_time);
                 Toast.makeText(RecieveAmountPage.this, "data is inserted", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RecieveAmountPage.this, Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);
@@ -132,7 +133,7 @@ public class RecieveAmountPage extends AppCompatActivity {
         });
     }
 
-    public void insertData(String amount, String discription, int paymenttype, String mobile, int customer, String rece_time) {
+    public void insertData(String amount, String discription, int paymenttype, String mobile, String customer, String rece_time) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHandler.Given_Money, amount);
