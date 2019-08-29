@@ -80,6 +80,18 @@ public class MainActivity extends AppCompatActivity
         sqLiteDatabase = openHelper.getReadableDatabase();
         String srtcount = "";
          int rows = 0;
+
+//         cursor = openHelper.getAllData();
+//         if(cursor.moveToFirst()){
+//            do {
+//                String totel_money = cursor.getString(0);
+//
+//             }
+//            while (cursor.moveToNext());
+//         }
+//
+         
+
         cursor = openHelper.getAllUserData();
         if (cursor.moveToFirst()) {
             do {

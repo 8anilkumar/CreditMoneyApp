@@ -72,7 +72,7 @@ public class CastumerAdapter extends RecyclerView.Adapter {
                 String discription = modelClasses.get(position).getDiscription();
                 int user_sta = modelClasses.get(position).getStatus();
 //                Toast.makeText(viewHolder.itemView.getContext(), "money  r"+user_sta, Toast.LENGTH_SHORT).show();
-                int time = modelClasses.get(position).getTime();
+                String time = modelClasses.get(position).getTime();
                 ((Leftdatacontent) viewHolder).setData(title, discription, user_sta, time);
 
                 break;
@@ -81,7 +81,7 @@ public class CastumerAdapter extends RecyclerView.Adapter {
                 String data = modelClasses.get(position).getAmount();
                 String rec_dis = modelClasses.get(position).getDiscription();
                 int cus_sta = modelClasses.get(position).getStatus();
-                int receive_time = modelClasses.get(position).getTime();
+                String receive_time = modelClasses.get(position).getTime();
 //                Toast.makeText(viewHolder.itemView.getContext(), "money  l"+cus_sta, Toast.LENGTH_SHORT).show();
 
                 ((Rightdatacontent) viewHolder).setDatabottom(data, rec_dis, cus_sta, receive_time);
@@ -114,11 +114,11 @@ public class CastumerAdapter extends RecyclerView.Adapter {
             givetime = itemView.findViewById(R.id.amount_given_time);
         }
 
-        private void setData(String amount, String discription, int user_sta, int time) {
+        private void setData(String amount, String discription, int user_sta, String time) {
             hometitle.setText(amount);
             dis.setText(discription);
             user_status.setText(user_sta + "");
-            givetime.setText(String.valueOf(time));
+            givetime.setText(time + "");
         }
     }
 
@@ -138,12 +138,12 @@ public class CastumerAdapter extends RecyclerView.Adapter {
 
         }
 
-        private void setDatabottom(String title, String received_discription, int cus_sta, int receive_time) {
+        private void setDatabottom(String title, String received_discription, int cus_sta, String receive_time) {
             bottom_txt.setText(title);
             res_Discription.setText(received_discription);
             status.setText(cus_sta + "");
             //Toast.makeText(, "", Toast.LENGTH_SHORT).show();
-            receive_money_Time.setText(String.valueOf(receive_time));
+            receive_money_Time.setText(receive_time + "");
         }
     }
 }

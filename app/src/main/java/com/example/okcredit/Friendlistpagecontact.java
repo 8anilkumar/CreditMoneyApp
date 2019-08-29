@@ -41,6 +41,8 @@ public class Friendlistpagecontact extends AppCompatActivity {
     int totel = 0;
     int user_totel = 0;
     int customer_totel_amount = 0;
+    int duepayment = 0;
+    int advance = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +59,14 @@ public class Friendlistpagecontact extends AppCompatActivity {
         give_payment = findViewById(R.id.get_payment_money);
         accept_payment = findViewById(R.id.accept_payment_money);
 
-//        backpage=(ImageView) findViewById(R.id.back);
-//        backpage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent=new Intent(Friendlistpagecontact.this,Payment_Account_Data.class);
-//                startActivity(intent);
-//            }
-//        });
+        backpage = findViewById(R.id.back);
+        backpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Friendlistpagecontact.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Intent intent = getIntent();
         username = intent.getStringExtra("name");
@@ -118,43 +120,41 @@ public class Friendlistpagecontact extends AppCompatActivity {
         //cursor = openHelper.getAllData();
         cursor = openHelper.getPaymentInfoByNumber(mobileNumber);
         int paymenttype = 0;
-        int time = 0;
+        String time = "";
         if (cursor.moveToFirst()) {
             do {
                 String amount;
                 String discription;
                 String user_num;
-                int status;
                 amount = cursor.getString(0);
                 discription = cursor.getString(1);
                 paymenttype = cursor.getInt(2);
                 user_num = cursor.getString(4);
-                status = cursor.getInt(5);
-                time = cursor.getInt(6);
-                Toast.makeText(this, "Status:-" + status, Toast.LENGTH_SHORT).show();
-                ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num, status);
-                modelClasses.add(modelClass);
+                time = cursor.getString(6);
 
+                int count = Integer.parseInt(amount);
                 if (paymenttype == 0) {
-                    int count = Integer.parseInt(amount);
                     user_totel_amount = user_totel_amount + count;
                 } else {
-                    int count = Integer.parseInt(amount);
                     customer_totel_amount = customer_totel_amount + count;
                 }
+                if (user_totel_amount > customer_totel_amount) {
+                    totel = user_totel_amount - customer_totel_amount;
+                } else {
+                    totel = customer_totel_amount - user_totel_amount;
+                }
+                Toast.makeText(this, "Due_amount" + totel, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(this, "Advance_amount" + user_totel, Toast.LENGTH_SHORT).show();
+
+                ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num, totel, time);
+                modelClasses.add(modelClass);
+
+
 
             }
             while (cursor.moveToNext());
 
-            if (user_totel_amount > customer_totel_amount) {
-                totel = user_totel_amount - customer_totel_amount;
-                Toast.makeText(this, "Due_amount" + totel, Toast.LENGTH_SHORT).show();
-
-            } else {
-                user_totel = customer_totel_amount - user_totel_amount;
-                Toast.makeText(this, "Advance_amount" + user_totel, Toast.LENGTH_SHORT).show();
-
-            }
 
             CastumerAdapter adapter = new CastumerAdapter(modelClasses);
             recyclerView.setAdapter(adapter);

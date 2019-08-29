@@ -12,9 +12,9 @@ public class ModelClass {
     private String discription;
     private String mobile;
     private int status;
-    private int time;
+    private String time;
 
-    public ModelClass(String amount, String discription, int viewType, String mobile, int status) {
+    public ModelClass(String amount, String discription, int viewType, String mobile, int status, String time) {
 
         this.amount = amount;
         this.discription = discription;
@@ -22,6 +22,7 @@ public class ModelClass {
         this.status = status;
         this.viewType = viewType;
         this.mobile = mobile;
+        this.time = time;
 
     }
 
@@ -45,7 +46,7 @@ public class ModelClass {
         this.mobile = mobile;
     }
 
-    public ModelClass(String amount, String discription, int viewType, String data, String status, int time) {
+    public ModelClass(String amount, String discription, int viewType, String data, String status, String time) {
         this.time = time;
         this.image_view = image_view;
         this.data = data;
@@ -94,11 +95,11 @@ public class ModelClass {
         this.status = status;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

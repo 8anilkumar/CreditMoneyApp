@@ -67,7 +67,8 @@
             android:id="@+id/received_amount_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="left"
+            android:layout_marginLeft="25dp"
             android:text="amount" />
     </LinearLayout>
 </LinearLayout>

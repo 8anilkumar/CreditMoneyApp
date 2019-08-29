@@ -179,13 +179,14 @@ public class GiveAmount extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
                 String time = simpleDateFormat.format(calendar.getTime());
+
                 sqLiteDatabase = openHelper.getWritableDatabase();
                 String amount = txtruppes.getText().toString();
                 String discription = adddiscription.getText().toString();
                 int paymenttype = 0;
-                String rupee = String.valueOf(userdata);
+//                String rupee = String.valueOf(userdata);
                 String mobile = mobile_num;
-                insertData(amount, discription, paymenttype, mobile, rupee, time);
+                insertData(amount, discription, paymenttype, mobile, time);
                 Intent intent=new Intent(GiveAmount.this,Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);
                 intent.putExtra("name", name);
@@ -195,14 +196,14 @@ public class GiveAmount extends AppCompatActivity {
         });
     }
 
-    public void insertData(String amount, String discription, int paymenttype, String mobile, String rupee, String time) {
+    public void insertData(String amount, String discription, int paymenttype, String mobile, String time) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHandler.Given_Money, amount);
         contentValues.put(DatabaseHandler.Given_Discription, discription);
         contentValues.put(DatabaseHandler.Money_Status, paymenttype);
         contentValues.put(DatabaseHandler.Mobile_Number, mobile);
-        contentValues.put(DatabaseHandler.Given_Time, rupee);
+//        contentValues.put(DatabaseHandler.Given_Time, rupee);
         contentValues.put(DatabaseHandler.Give_Curren_Time, time);
 
         long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);

@@ -29,8 +29,10 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        totel= (TextView)findViewById(R.id.user);
+        totel = findViewById(R.id.user);
 
+        final SharedPreferences sharedPreferences = getSharedPreferences("USER_CREDENTIALS", Context.MODE_PRIVATE);
+        final String user = sharedPreferences.getString("TOTEL_USER", "DEFAULT_NAME");
 
 
 
@@ -40,7 +42,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         List<HomepageModelClass> homepageModelClasses = new ArrayList<>();
-        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_group_black_24dp, "CUSTOMERS","32"));
+        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_group_black_24dp, "CUSTOMERS", user));
         homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_account_balance_wallet_black, "BALANCE", "326566"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_history_black, "Account Statement"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_file_download_abc, "Download Backup"));
@@ -66,8 +68,6 @@ public class HomePageActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(homePageAdapter);
         homePageAdapter.notifyDataSetChanged();
-//        final SharedPreferences sharedPreferences = getSharedPreferences("USER_CREDENTIALS", Context.MODE_PRIVATE);
-//        final String user = sharedPreferences.getString("TOTEL_USER","DEFAULT_NAME");
 
 
     }
