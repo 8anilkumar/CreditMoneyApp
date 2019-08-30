@@ -32,4 +32,5 @@
         RecordPaymentReceivedFromCustomer
     </string>
     <string name="title_activity_account_statment">AccountStatment</string>
+    <string name="title_activity_security_user_page">SecurityUserPage</string>
 </resources>

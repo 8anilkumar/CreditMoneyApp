@@ -11,10 +11,10 @@ public class ModelClass {
     private String balance;
     private String discription;
     private String mobile;
-    private int status;
+    private String status;
     private String time;
 
-    public ModelClass(String amount, String discription, int viewType, String mobile, int status, String time) {
+    public ModelClass(String amount, String discription, int viewType, String mobile, String status, String time) {
 
         this.amount = amount;
         this.discription = discription;
@@ -46,7 +46,7 @@ public class ModelClass {
         this.mobile = mobile;
     }
 
-    public ModelClass(String amount, String discription, int viewType, String data, String status, String time) {
+    public ModelClass(String amount, String discription, int viewType, String data, String time) {
         this.time = time;
         this.image_view = image_view;
         this.data = data;
@@ -87,11 +87,11 @@ public class ModelClass {
     private int image_view;
     private String data;
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

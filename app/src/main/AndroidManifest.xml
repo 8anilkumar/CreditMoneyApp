@@ -15,9 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SecurityUserPage"
+            android:label="@string/title_activity_security_user_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".AccountStatment"
             android:label="@string/title_activity_account_statment"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RecordPaymentReceivedFromCustomer"
             android:label="@string/title_activity_record_payment_received_from_customer"

@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -67,7 +66,6 @@ public class GiveAmount extends AppCompatActivity {
         final String mobile_num = intent.getStringExtra("number");
         final String name = intent.getStringExtra("name");
         final int userdata = intent.getIntExtra("user", 0);
-        Toast.makeText(this, "User" + userdata, Toast.LENGTH_SHORT).show();
         namee.setText(name);
         number.setText(mobile_num);
 
@@ -186,7 +184,9 @@ public class GiveAmount extends AppCompatActivity {
                 int paymenttype = 0;
 //                String rupee = String.valueOf(userdata);
                 String mobile = mobile_num;
+
                 insertData(amount, discription, paymenttype, mobile, time);
+
                 Intent intent=new Intent(GiveAmount.this,Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);
                 intent.putExtra("name", name);

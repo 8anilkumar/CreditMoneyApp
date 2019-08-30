@@ -3,6 +3,8 @@ package com.example.okcredit;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +23,12 @@ import static com.example.okcredit.HomepageModelClass.HOME_PAGE_BOTTOM_SETTING;
 public class HomePageActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView totel;
-
+    DatabaseHandler openHelper;
+    SQLiteDatabase sqLiteDatabase;
+    Cursor cursor;
+    String amount;
+    String allTransaction = "";
+    int totel_transaction = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +49,25 @@ public class HomePageActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         List<HomepageModelClass> homepageModelClasses = new ArrayList<>();
+
+
+        openHelper = new DatabaseHandler(getApplicationContext());
+        sqLiteDatabase = openHelper.getReadableDatabase();
+        cursor = openHelper.getAllData();
+        if (cursor.moveToFirst()) {
+            do {
+                amount = cursor.getString(0);
+
+                int variable = Integer.parseInt(amount);
+                totel_transaction = totel_transaction + variable;
+            }
+            while (cursor.moveToNext());
+
+        }
+        allTransaction = String.valueOf(totel_transaction);
+
         homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_group_black_24dp, "CUSTOMERS", user));
-        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_account_balance_wallet_black, "BALANCE", "326566"));
+        homepageModelClasses.add(new HomepageModelClass(BALANCE_CHECK, R.drawable.ic_account_balance_wallet_black, "BALANCE", allTransaction));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_history_black, "Account Statement"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_file_download_abc, "Download Backup"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_security_black, "Security"));

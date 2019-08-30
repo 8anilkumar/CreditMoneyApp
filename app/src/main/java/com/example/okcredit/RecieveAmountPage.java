@@ -45,7 +45,6 @@ public class RecieveAmountPage extends AppCompatActivity {
         final String mobile_num = intent.getStringExtra("number");
         final String name = intent.getStringExtra("name");
         final int customer = intent.getIntExtra("receiver", 0);
-        Toast.makeText(this, "Customer=" + customer, Toast.LENGTH_SHORT).show();
 
         namee.setText(name);
         number.setText(mobile_num);

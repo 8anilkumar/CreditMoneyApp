@@ -48,6 +48,8 @@
                     android:src="@drawable/ic_account_balance_black_24dp"/>
 
                 <ImageView
+                    android:id="@+id/progress"
+                    android:clickable="true"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

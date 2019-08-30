@@ -100,11 +100,13 @@ public class ContactListPage extends AppCompatActivity {
                     String id = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID));
                     String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                     String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    //  String mg_url = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.I));
 
 
                     Contacts selectUser = new Contacts();
                     selectUser.setName(name);
                     selectUser.setPhone(phoneNumber);
+                    selectUser.getImgURL();
                     selectUsers.add(selectUser);
 //
                 }

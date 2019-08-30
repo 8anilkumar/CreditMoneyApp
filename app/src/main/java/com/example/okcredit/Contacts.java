@@ -4,6 +4,8 @@ public class Contacts {
     String name;
     String phone;
     String side;
+    int imgURL;
+
     public String getSide() {
         return side;
     }
@@ -18,7 +20,6 @@ public class Contacts {
 
     }
 
-    int imgURL;
 
     public int getImgURL(){
         return imgURL;

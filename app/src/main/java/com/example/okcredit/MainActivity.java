@@ -1,17 +1,21 @@
 package com.example.okcredit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +41,11 @@ public class MainActivity extends AppCompatActivity
     Cursor cursor;
     String mobileNumber = "";
     TextView number;
+    TextView bar;
+    ImageView progress;
+    ProgressBar progressBar;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,37 @@ public class MainActivity extends AppCompatActivity
 
 
         number = findViewById(R.id.number);
+        progress = findViewById(R.id.progress);
+        progressBar = findViewById(R.id.progressBar);
+        progress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (progressStatus < 100) {
+                            progressStatus += 10;
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressBar.setProgress(progressStatus);
+                                    if (progressStatus == 100) {
+                                        progressBar.setProgress(progressStatus);
+                                        Toast.makeText(MainActivity.this, "Download Complete", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            try {
+                                Thread.sleep(200);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).start();
+
+            }
+        });
 
 
         home_btn = findViewById(R.id.navigation_home);
@@ -68,6 +108,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        final SharedPreferences sharedPreferences1 = getSharedPreferences("USER_AMOUNT", Context.MODE_PRIVATE);
+        final String user = sharedPreferences1.getString("TOTEL", "DEFAULT_NAME");
+
 
         recyclerView = findViewById(R.id.added_customer);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -80,27 +123,19 @@ public class MainActivity extends AppCompatActivity
         sqLiteDatabase = openHelper.getReadableDatabase();
         String srtcount = "";
          int rows = 0;
-
-//         cursor = openHelper.getAllData();
-//         if(cursor.moveToFirst()){
-//            do {
-//                String totel_money = cursor.getString(0);
-//
-//             }
-//            while (cursor.moveToNext());
-//         }
-//
          
 
         cursor = openHelper.getAllUserData();
         if (cursor.moveToFirst()) {
             do {
-
+                //String totel_money="";
                 String name = cursor.getString(0);
                 String status = cursor.getString(1);
-                int totel_money = cursor.getInt(2);
+                String totel_money = cursor.getString(2);
                 String phone = cursor.getString(3);
-                ModelClassForAddedCustomer contacts = new ModelClassForAddedCustomer(name, status, totel_money, phone);
+                String day = cursor.getString(4);
+                String user_img = name.charAt(0) + "";
+                ModelClassForAddedCustomer contacts = new ModelClassForAddedCustomer(name, status, user, phone, day, user_img);
                 modelClassForAddedCustomers.add(contacts);
                 rows = cursor.getCount();
 

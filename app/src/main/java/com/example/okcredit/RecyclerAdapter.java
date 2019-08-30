@@ -1,7 +1,6 @@
 package com.example.okcredit;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -15,7 +14,9 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -30,7 +31,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private ArrayList<Contacts> arraylist;
     private ArrayList<Contacts> arraylistfull;
     boolean checked = false;
-    Context context;
+
 
 
 
@@ -56,7 +57,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     }
 
-    public void insertData(String name, String status, int totel_amount, String number) {
+    public void insertData(String name, String status, int totel_amount, String number, String day) {
 
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -64,6 +65,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         contentValues.put(DatabaseHandler.Status, status);
         contentValues.put(DatabaseHandler.Totel_Money, totel_amount);
         contentValues.put(DatabaseHandler.Mobile_Number, number);
+        contentValues.put(DatabaseHandler.Current_Day, day);
+
         long id = db.insert(DatabaseHandler.ALL_USER_TABLE, null, contentValues);
         Log.e("Result", id + "");
     }
@@ -80,7 +83,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.contact_select_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertData(cont.get(position).getName(), "", 0, cont.get(position).getPhone());
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+                String day = simpleDateFormat.format(calendar.getTime());
+                insertData(cont.get(position).getName(), "", 0, cont.get(position).getPhone(), day);
 
                 Toast.makeText(view.getContext(), "row selected  " + cont.get(position).getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(view.getContext(), Payment_Account_Data.class);

@@ -1,12 +1,15 @@
 package com.example.okcredit;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,11 +41,11 @@ public class Friendlistpagecontact extends AppCompatActivity {
     String username = "";
     int userstatus = 0;
     int user_totel_amount = 0;
-    int totel = 0;
+    String totel = "";
     int user_totel = 0;
     int customer_totel_amount = 0;
-    int duepayment = 0;
-    int advance = 0;
+    String payment = "";
+    String advance = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,6 @@ public class Friendlistpagecontact extends AppCompatActivity {
         username = intent.getStringExtra("name");
         mobileNumber = intent.getStringExtra("mobile");
         userstatus = intent.getIntExtra("new", 0);
-
 
 
         user_name.setText(username);
@@ -139,17 +141,29 @@ public class Friendlistpagecontact extends AppCompatActivity {
                     customer_totel_amount = customer_totel_amount + count;
                 }
                 if (user_totel_amount > customer_totel_amount) {
-                    totel = user_totel_amount - customer_totel_amount;
-                } else {
-                    totel = customer_totel_amount - user_totel_amount;
-                }
-                Toast.makeText(this, "Due_amount" + totel, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(this, "Advance_amount" + user_totel, Toast.LENGTH_SHORT).show();
+                    payment = String.valueOf(user_totel_amount - customer_totel_amount);
+                    totel = payment + " Due";
+                    SharedPreferences sharedPreferences = getSharedPreferences("USER_AMOUNT", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("TOTEL", String.valueOf(totel));
+                    editor.commit();
+                    //  insertTotel( totel);
+
+                } else {
+
+                    advance = String.valueOf(customer_totel_amount - user_totel_amount);
+                    totel = advance + " Advance";
+                    SharedPreferences sharedPreferences = getSharedPreferences("USER_AMOUNT", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("TOTEL", String.valueOf(totel));
+                    editor.commit();
+
+                    // insertTotelData( totel);
+                }
 
                 ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num, totel, time);
                 modelClasses.add(modelClass);
-
 
 
             }
@@ -185,6 +199,23 @@ public class Friendlistpagecontact extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void insertTotelData(String totel) {
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHandler.Totel_Money, totel);
+        long id = db.insert(DatabaseHandler.ALL_USER_TABLE, null, contentValues);
+        Log.e("Result", id + "");
+
+    }
+
+    private void insertTotel(String totel) {
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHandler.Totel_Money, totel);
+        long id = db.insert(DatabaseHandler.ALL_USER_TABLE, null, contentValues);
+        Log.e("Result", id + "");
     }
 }
 
