@@ -79,6 +79,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
                 int image = modelClassList.get(position).getImage_view();
                 String data = modelClassList.get(position).getData();
+//                Toast.makeText(viewHolder.itemView.getContext(), "Image"+image, Toast.LENGTH_SHORT).show();
                 ((Homepagebottomsetting) viewHolder).setDatabottom(image, data);
                 break;
 

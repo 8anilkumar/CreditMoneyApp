@@ -26,37 +26,46 @@ public class AccountStatment extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         recyclerView = findViewById(R.id.accountstatment);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
 
         recyclerView.setLayoutManager(layoutManager);
-        List<ModleclassForAccountStatment> modelClasses = new ArrayList<>();
+        List<ModelClass> modelClasses = new ArrayList<>();
 
-//        openHelper = new DatabaseHandler(getApplicationContext());
-//        sqLiteDatabase = openHelper.getReadableDatabase();
-//        cursor = openHelper.getAllData();
-////        cursor = openHelper.getPaymentInfoByNumber(mobileNumber);
-//        int paymenttype = 0;
-//        if (cursor.moveToFirst()) {
-//            do {
-//                String amount, discription, user_num;
-//                amount = cursor.getString(0);
-//                discription = cursor.getString(1);
-//                paymenttype = cursor.getInt(3);
-//                user_num = cursor.getString(5);
-//                ModleclassForAccountStatment modelClass = new ModleclassForAccountStatment(amount, discription, paymenttype, user_num);
-//                modelClasses.add(modelClass);
-//
-//            }
-//            while (cursor.moveToNext());
-//
-//            AccountStatmentAdapterClass adapter = new AccountStatmentAdapterClass(modelClasses);
-//            recyclerView.setAdapter(adapter);
-//            adapter.notifyDataSetChanged();
-//
-//        }
+        openHelper = new DatabaseHandler(getApplicationContext());
+        sqLiteDatabase = openHelper.getReadableDatabase();
+        cursor = openHelper.getAllData();
+        int paymenttype = 0;
+        String time = "";
+        if (cursor.moveToFirst()) {
+            do {
+                String amount;
+                String discription;
+                String user_num;
+                amount = cursor.getString(0);
+                discription = cursor.getString(1);
+                paymenttype = cursor.getInt(2);
+                user_num = cursor.getString(4);
+                time = cursor.getString(6);
+
+                ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num, time);
+                modelClasses.add(modelClass);
+
+
+            }
+            while (cursor.moveToNext());
+
+
+            CastumerAdapter adapter = new CastumerAdapter(modelClasses);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+        }
 
     }
-}
+
+    }
+
 
