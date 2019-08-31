@@ -4,6 +4,17 @@
     <color name="colorPrimaryDark">#35DF3C</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorToolbar">#FFF</color>
+    <color name="color1">#D61A1A</color>
+    <color name="color2">#18E622</color>
+    <color name="color3">#3989C9</color>
+    <color name="color4">#5BC1CE</color>
+    <color name="color5">#E9E8E5</color>
+    <color name="color6">#5ACAC0</color>
+    <color name="color7">#FFEB3B</color>
+    <color name="color8">#FF5722</color>
+    <color name="color9">#D50B50</color>
+    <color name="color10">#757171</color>
+
 
     <!--<color name="colorTitle">#ffffff</color>-->
 </resources>

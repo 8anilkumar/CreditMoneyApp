@@ -17,6 +17,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String User_Name = "user_name";
     public static final String Mobile_Number = "mobile_number";
     public static final String Give_Curren_Time = "give_current_time";
+    public static final String Give_Curren_Date = "give_current_date";
+
 
     public static final String ALL_USER_TABLE = "allusertable";
     public static final String Totel_Money = "totel_money";
@@ -31,12 +33,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CREATE_ACTIVITY_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + Given_Money + " INTEGER ," + Given_Discription + " TEXT,"
-                + Money_Status + " INTEGER," + User_Name + " TEXT," + Mobile_Number + " TEXT ," + Given_Time + " INTEGER , " + Give_Curren_Time + " TEXT " + ")";
+                + Money_Status + " INTEGER," + User_Name + " TEXT," + Mobile_Number + " TEXT ," + Given_Time + " INTEGER , " + Give_Curren_Time + " TEXT , " + Give_Curren_Date + " TEXT " + " )";
         sqLiteDatabase.execSQL(CREATE_ACTIVITY_TABLE);
 
 
         String CREATE_ALL_USER_ACTIVITY = "CREATE TABLE " + ALL_USER_TABLE + "(" + User_Name + " TEXT,"
-                + Status + " TEXT," + Totel_Money + " INTEGER," + Mobile_Number + " TEXT ," + Current_Day + " Text " + ")";
+                + Status + " TEXT," + Totel_Money + " INTEGER," + Mobile_Number + " TEXT ," + Current_Day + " TEXT " + ")";
         sqLiteDatabase.execSQL(CREATE_ALL_USER_ACTIVITY);
     }
 

@@ -1,8 +1,12 @@
 package com.example.okcredit;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,6 +22,7 @@ public class AccountStatment extends AppCompatActivity {
     DatabaseHandler openHelper;
     SQLiteDatabase sqLiteDatabase;
     Cursor cursor;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,39 +31,44 @@ public class AccountStatment extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        back =(ImageView)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountStatment.this,HomePageActivity.class);
+                startActivity(intent);
+            }
+        });
         recyclerView = findViewById(R.id.accountstatment);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
 
         recyclerView.setLayoutManager(layoutManager);
-        List<ModelClass> modelClasses = new ArrayList<>();
+        List<ModleclassForAccountStatment> modleclassForAccountStatments = new ArrayList<>();
 
         openHelper = new DatabaseHandler(getApplicationContext());
         sqLiteDatabase = openHelper.getReadableDatabase();
         cursor = openHelper.getAllData();
         int paymenttype = 0;
         String time = "";
+        String date = "";
         if (cursor.moveToFirst()) {
             do {
                 String amount;
                 String discription;
-                String user_num;
                 amount = cursor.getString(0);
                 discription = cursor.getString(1);
                 paymenttype = cursor.getInt(2);
-                user_num = cursor.getString(4);
                 time = cursor.getString(6);
-
-                ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num, time);
-                modelClasses.add(modelClass);
+                date = cursor.getString(7);
+//               Toast.makeText(this, "datadata"+paymenttype, Toast.LENGTH_SHORT).show();
+                ModleclassForAccountStatment modelClass = new ModleclassForAccountStatment(amount, discription, paymenttype,  time, date);
+                modleclassForAccountStatments.add(modelClass);
 
 
             }
             while (cursor.moveToNext());
-
-
-            CastumerAdapter adapter = new CastumerAdapter(modelClasses);
+            AccountStatmentAdapterClass adapter = new AccountStatmentAdapterClass(modleclassForAccountStatments);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 

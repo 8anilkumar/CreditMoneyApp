@@ -113,7 +113,10 @@ public class RecieveAmountPage extends AppCompatActivity {
             public void onClick(View view) {
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+                SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("MMM:dd:yyyy");
                 String rece_time = simpleDateFormat.format(calendar.getTime());
+                String date = simpleDateFormat1.format(calendar.getTime());
+
                 sqLiteDatabase = openHelper.getWritableDatabase();
                 String amount = txtruppes_rec.getText().toString();
                 String discription = addtext_rec.getText().toString();
@@ -121,7 +124,7 @@ public class RecieveAmountPage extends AppCompatActivity {
                 String receive_rupee = String.valueOf(customer);
                 String mobile = mobile_num;
                 int customer_status = customer;
-                insertData(amount, discription, paymenttype, mobile, rece_time);
+                insertData(amount, discription, paymenttype, mobile, rece_time,date);
                 Toast.makeText(RecieveAmountPage.this, "data is inserted", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RecieveAmountPage.this, Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);
@@ -132,15 +135,15 @@ public class RecieveAmountPage extends AppCompatActivity {
         });
     }
 
-    public void insertData(String amount, String discription, int paymenttype, String mobile, String rece_time) {
+    public void insertData(String amount, String discription, int paymenttype, String mobile, String rece_time, String date) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHandler.Given_Money, amount);
         contentValues.put(DatabaseHandler.Given_Discription, discription);
         contentValues.put(DatabaseHandler.Money_Status, paymenttype);
         contentValues.put(DatabaseHandler.Mobile_Number, mobile);
-//        contentValues.put(DatabaseHandler.Given_Time, customer);
         contentValues.put(DatabaseHandler.Give_Curren_Time, rece_time);
+        contentValues.put(DatabaseHandler.Give_Curren_Date, date);
         long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);
         Log.e("Result", id + "");
 

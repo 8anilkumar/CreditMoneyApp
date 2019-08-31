@@ -176,7 +176,9 @@ public class GiveAmount extends AppCompatActivity {
             public void onClick(View view) {
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+                SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("MMM:dd:yyyy");
                 String time = simpleDateFormat.format(calendar.getTime());
+                String date = simpleDateFormat1.format(calendar.getTime());
 
                 sqLiteDatabase = openHelper.getWritableDatabase();
                 String amount = txtruppes.getText().toString();
@@ -185,7 +187,7 @@ public class GiveAmount extends AppCompatActivity {
 //                String rupee = String.valueOf(userdata);
                 String mobile = mobile_num;
 
-                insertData(amount, discription, paymenttype, mobile, time);
+                insertData(amount, discription, paymenttype, mobile, time, date);
 
                 Intent intent=new Intent(GiveAmount.this,Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);
@@ -196,15 +198,15 @@ public class GiveAmount extends AppCompatActivity {
         });
     }
 
-    public void insertData(String amount, String discription, int paymenttype, String mobile, String time) {
+    public void insertData(String amount, String discription, int paymenttype, String mobile, String time,String date) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHandler.Given_Money, amount);
         contentValues.put(DatabaseHandler.Given_Discription, discription);
         contentValues.put(DatabaseHandler.Money_Status, paymenttype);
         contentValues.put(DatabaseHandler.Mobile_Number, mobile);
-//        contentValues.put(DatabaseHandler.Given_Time, rupee);
         contentValues.put(DatabaseHandler.Give_Curren_Time, time);
+        contentValues.put(DatabaseHandler.Give_Curren_Date, date);
 
         long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);
         Log.e("Result", id + "");

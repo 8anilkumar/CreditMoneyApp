@@ -123,6 +123,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
         cursor = openHelper.getPaymentInfoByNumber(mobileNumber);
         int paymenttype = 0;
         String time = "";
+        String date = "";
         if (cursor.moveToFirst()) {
             do {
                 String amount;
@@ -133,6 +134,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 paymenttype = cursor.getInt(2);
                 user_num = cursor.getString(4);
                 time = cursor.getString(6);
+
 
                 int count = Integer.parseInt(amount);
                 if (paymenttype == 0) {

@@ -83,6 +83,11 @@ public class HomePageActivity extends AppCompatActivity {
                     Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
+                if (position == 4) {
+                    Intent intent = new Intent(HomePageActivity.this, OkCreditSecurity.class);
+                    Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }
             }
 
             @Override

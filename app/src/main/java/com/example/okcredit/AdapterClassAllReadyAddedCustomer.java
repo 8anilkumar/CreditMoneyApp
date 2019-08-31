@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<AdapterClassAllReadyAddedCustomer.ViewHolder> {
@@ -23,6 +24,8 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
 
     private List<ModelClassForAddedCustomer> modelClassForAddedCustomers;
     private DashbordlistnerClassInterface dashbordlistnerClassInterface;
+
+
 
 
     public AdapterClassAllReadyAddedCustomer(List<ModelClassForAddedCustomer> modelClassForAddedCustomers, DashbordlistnerClassInterface dashbordlistnerClassInterface) {
@@ -64,7 +67,6 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
         });
 
     }
-
     @Override
     public int getItemCount() {
         return modelClassForAddedCustomers.size();

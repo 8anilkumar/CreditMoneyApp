@@ -14,6 +14,7 @@ public class ModelClass {
     private String status;
     private String time;
 
+
     public ModelClass(String amount, String discription, int viewType, String mobile, String status, String time) {
 
         this.amount = amount;

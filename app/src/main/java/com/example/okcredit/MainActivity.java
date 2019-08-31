@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity
     private int progressStatus = 0;
     private Handler handler = new Handler();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
 
 
         home_btn = findViewById(R.id.navigation_home);

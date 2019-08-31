@@ -1,5 +1,7 @@
 package com.example.okcredit;
 
+
+
 public class ModleclassForAccountStatment {
 
     public static final int LEFT_SIDE_DATA = 0;
@@ -8,9 +10,32 @@ public class ModleclassForAccountStatment {
 
     private int viewType;
     private String amount;
-    private String balance;
     private String discription;
-    private String mobile;
+    private String status;
+    private String time;
+    private String date;
+    private String data;
+
+
+
+    public ModleclassForAccountStatment(String amount, String discription, int viewType, String paymenttype, String date) {
+        this.amount = amount;
+        this.discription = discription;
+        this.status = paymenttype;
+        this.viewType = viewType;
+        this.date = date;
+
+
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 
 
     public int getViewType() {
@@ -20,25 +45,9 @@ public class ModleclassForAccountStatment {
     public void setViewType(int viewType) {
         this.viewType = viewType;
     }
-///LEFT_SIDE_DATA
 
 
-    public String getMobile() {
-        return mobile;
-    }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public ModleclassForAccountStatment(String amount, String discription, int viewType, String mobile) {
-        this.amount = amount;
-        this.discription = discription;
-        this.balance = balance;
-        this.viewType = viewType;
-        this.mobile = mobile;
-
-    }
 
 
     public String getDiscription() {
@@ -58,37 +67,28 @@ public class ModleclassForAccountStatment {
         this.amount = title;
     }
 
-    public String getBalance() {
-        return balance;
+
+
+
+
+    public String getStatus() {
+        return status;
     }
 
-    public void setBalance(String balance) {
-        this.balance = balance;
+    public void setStatus(String status) {
+        this.status = status;
     }
-    ///////LEFT_SIDE_DATA
 
-    ///////RIGHT_SIDE_DATA
+    public String getTime() {
+        return time;
+    }
 
-    private int image_view;
-    private String data;
-
-
-    public ModleclassForAccountStatment(int viewType, String data) {
-        this.image_view = image_view;
-        this.data = data;
-        this.viewType = viewType;
-
-
+    public void setTime(String time) {
+        this.time = time;
     }
 
 
-    public int getImage_view() {
-        return image_view;
-    }
 
-    public void setImage_view(int image_view) {
-        this.image_view = image_view;
-    }
 
     public String getData() {
         return data;

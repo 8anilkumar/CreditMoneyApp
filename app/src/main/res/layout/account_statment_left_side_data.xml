@@ -17,19 +17,18 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:text="amount"
                 android:id="@+id/rec_discription"
-                android:layout_gravity="left"
                 android:textColor="#C9C8C5"
-                android:paddingRight="10dp"
-                android:layout_marginTop="5dp"
-                android:paddingLeft="10dp"
+                android:paddingRight="20dp"
+                android:layout_marginTop="8dp"
+               android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13dp" />
 
             <LinearLayout
-                android:layout_marginTop="5dp"
-                android:layout_gravity="left"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
@@ -38,31 +37,41 @@
                 <TextView
                     android:textStyle="bold"
                     android:id="@+id/txt_recieve"
-                    android:layout_gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="\u20B9"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="16dp" />
+                <TextView
+                    android:id="@+id/amount_receive_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:paddingLeft="20dp"
+                    android:text="10:39PM"
+                    android:textSize="10dp" />
+                <TextView
+                    android:id="@+id/amount_receive_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="10:39PM"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="30dp"
+                    android:textSize="10dp" />
 
-                    />
 
-                <ImageView
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_done_all_black_24dp"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp" />
             </LinearLayout>
         </LinearLayout>
 
         <TextView
-            android:id="@+id/status_amount"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#D6D3CB"
+            android:id="@+id/received_amount_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:layout_weight="1" />
+            android:textStyle="normal"
+           />
     </LinearLayout>
-
 </LinearLayout>

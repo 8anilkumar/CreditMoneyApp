@@ -33,4 +33,6 @@
     </string>
     <string name="title_activity_account_statment">AccountStatment</string>
     <string name="title_activity_security_user_page">SecurityUserPage</string>
+    <string name="title_activity_ok_credit_security">OkCreditSecurity</string>
+    <string name="title_activity_update_password">UpdatePasswordActivity</string>
 </resources>

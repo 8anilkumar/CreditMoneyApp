@@ -4,11 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AccountStatment"
     tools:showIn="@layout/activity_account_statment">
 
+
+
+    <TextView
+
+        android:id="@+id/Notice_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Statement Of The Day"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="20dp"
+        android:drawablePadding="15dp"
+        android:textColor="#E20E0E"
+        android:background="@drawable/btn_text_corner"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="5dp"
         android:id="@+id/accountstatment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
