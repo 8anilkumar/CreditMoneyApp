@@ -10,17 +10,16 @@ public class ModleclassForAccountStatment {
 
     private int viewType;
     private String amount;
-    private String discription;
+    private String name;
     private String status;
     private String time;
     private String date;
     private String data;
 
 
-
-    public ModleclassForAccountStatment(String amount, String discription, int viewType, String paymenttype, String date) {
+    public ModleclassForAccountStatment(String amount, String name, int viewType, String paymenttype, String date) {
         this.amount = amount;
-        this.discription = discription;
+        this.name = name;
         this.status = paymenttype;
         this.viewType = viewType;
         this.date = date;
@@ -47,15 +46,12 @@ public class ModleclassForAccountStatment {
     }
 
 
-
-
-
-    public String getDiscription() {
-        return discription;
+    public String getName() {
+        return name;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setName(String discription) {
+        this.name = discription;
     }
 
 

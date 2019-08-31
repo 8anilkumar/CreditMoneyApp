@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -118,7 +119,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
 
     class Homepagebottomsetting extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-
+        private LinearLayout linearLayout;
         private ImageView bottom_img;
         private TextView bottom_txt;
         private WeakReference<AccountStatmentInterface> listenerRef;
@@ -129,8 +130,8 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             listenerRef = new WeakReference<AccountStatmentInterface>(listener);
             bottom_img = itemView.findViewById(R.id.img_contact_home_bottom_image);
             bottom_txt = itemView.findViewById(R.id.txt_home_bottom_text);
-
-            bottom_txt.setOnClickListener(this);
+            linearLayout = itemView.findViewById(R.id.layout);
+            linearLayout.setOnClickListener(this);
 
         }
 
@@ -143,7 +144,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == bottom_txt.getId()) {
+            if (view.getId() == linearLayout.getId()) {
                 Toast.makeText(view.getContext(), "ITEM PRESSED = " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
 
             } else {

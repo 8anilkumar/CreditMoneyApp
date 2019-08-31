@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,7 +30,7 @@ public class AccountStatment extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        back =(ImageView)findViewById(R.id.back);
+        back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,17 +51,18 @@ public class AccountStatment extends AppCompatActivity {
         int paymenttype = 0;
         String time = "";
         String date = "";
+        String name = "";
         if (cursor.moveToFirst()) {
             do {
                 String amount;
                 String discription;
                 amount = cursor.getString(0);
-                discription = cursor.getString(1);
                 paymenttype = cursor.getInt(2);
                 time = cursor.getString(6);
                 date = cursor.getString(7);
-//               Toast.makeText(this, "datadata"+paymenttype, Toast.LENGTH_SHORT).show();
-                ModleclassForAccountStatment modelClass = new ModleclassForAccountStatment(amount, discription, paymenttype,  time, date);
+                name = cursor.getString(8);
+                //Toast.makeText(this, "datadata"+name, Toast.LENGTH_SHORT).show();
+                ModleclassForAccountStatment modelClass = new ModleclassForAccountStatment(amount, name, paymenttype, time, date);
                 modleclassForAccountStatments.add(modelClass);
 
 

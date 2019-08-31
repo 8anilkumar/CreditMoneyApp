@@ -65,7 +65,7 @@ public class GiveAmount extends AppCompatActivity {
         Intent intent = getIntent();
         final String mobile_num = intent.getStringExtra("number");
         final String name = intent.getStringExtra("name");
-        final int userdata = intent.getIntExtra("user", 0);
+
         namee.setText(name);
         number.setText(mobile_num);
 
@@ -187,7 +187,7 @@ public class GiveAmount extends AppCompatActivity {
 //                String rupee = String.valueOf(userdata);
                 String mobile = mobile_num;
 
-                insertData(amount, discription, paymenttype, mobile, time, date);
+                insertData(amount, discription, paymenttype, mobile, time, date, name);
 
                 Intent intent=new Intent(GiveAmount.this,Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);
@@ -198,7 +198,7 @@ public class GiveAmount extends AppCompatActivity {
         });
     }
 
-    public void insertData(String amount, String discription, int paymenttype, String mobile, String time,String date) {
+    public void insertData(String amount, String discription, int paymenttype, String mobile, String time, String date, String name) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHandler.Given_Money, amount);
@@ -207,6 +207,7 @@ public class GiveAmount extends AppCompatActivity {
         contentValues.put(DatabaseHandler.Mobile_Number, mobile);
         contentValues.put(DatabaseHandler.Give_Curren_Time, time);
         contentValues.put(DatabaseHandler.Give_Curren_Date, date);
+        contentValues.put(DatabaseHandler.Give_User_Name, name);
 
         long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);
         Log.e("Result", id + "");

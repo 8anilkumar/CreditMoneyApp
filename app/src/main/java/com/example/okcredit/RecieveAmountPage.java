@@ -124,7 +124,7 @@ public class RecieveAmountPage extends AppCompatActivity {
                 String receive_rupee = String.valueOf(customer);
                 String mobile = mobile_num;
                 int customer_status = customer;
-                insertData(amount, discription, paymenttype, mobile, rece_time,date);
+                insertData(amount, discription, paymenttype, mobile, rece_time, date, name);
                 Toast.makeText(RecieveAmountPage.this, "data is inserted", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RecieveAmountPage.this, Friendlistpagecontact.class);
                 intent.putExtra("mobile", mobile);
@@ -135,7 +135,7 @@ public class RecieveAmountPage extends AppCompatActivity {
         });
     }
 
-    public void insertData(String amount, String discription, int paymenttype, String mobile, String rece_time, String date) {
+    public void insertData(String amount, String discription, int paymenttype, String mobile, String rece_time, String date, String name) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHandler.Given_Money, amount);
@@ -144,6 +144,8 @@ public class RecieveAmountPage extends AppCompatActivity {
         contentValues.put(DatabaseHandler.Mobile_Number, mobile);
         contentValues.put(DatabaseHandler.Give_Curren_Time, rece_time);
         contentValues.put(DatabaseHandler.Give_Curren_Date, date);
+        contentValues.put(DatabaseHandler.Give_User_Name, name);
+
         long id = db.insert(DatabaseHandler.TABLE_NAME, null, contentValues);
         Log.e("Result", id + "");
 

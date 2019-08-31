@@ -88,6 +88,11 @@ public class HomePageActivity extends AppCompatActivity {
                     Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
+                if (position == 8) {
+                    Intent intent = new Intent(HomePageActivity.this, Language.class);
+                    Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }
             }
 
             @Override

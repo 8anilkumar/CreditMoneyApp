@@ -1,11 +1,9 @@
 package com.example.okcredit;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,25 +67,25 @@ public class AccountStatmentAdapterClass extends RecyclerView.Adapter {
             case 0:
 
                 String title = modleclassForAccountStatments.get(position).getAmount();
-                String discription = modleclassForAccountStatments.get(position).getDiscription();
+                String name = modleclassForAccountStatments.get(position).getName();
                 String user_sta = modleclassForAccountStatments.get(position).getStatus();
                 String time = modleclassForAccountStatments.get(position).getTime();
                 String date = modleclassForAccountStatments.get(position).getDate();
 
 
 //                Toast.makeText(viewHolder.itemView.getContext(), "money  "+time, Toast.LENGTH_SHORT).show();
-                ((Leftdatacontent) viewHolder).setData(title, discription, user_sta, time,date);
+                ((Leftdatacontent) viewHolder).setData(title, name, user_sta, time, date);
 
                 break;
 
             case 1:
                 String data = modleclassForAccountStatments.get(position).getAmount();
-                String rec_dis = modleclassForAccountStatments.get(position).getDiscription();
+                String rec_name = modleclassForAccountStatments.get(position).getName();
                 String cus_sta = modleclassForAccountStatments.get(position).getStatus();
                 String receive_time = modleclassForAccountStatments.get(position).getTime();
                 String receive_date = modleclassForAccountStatments.get(position).getDate();
 //                Toast.makeText(viewHolder.itemView.getContext(), "money  l"+cus_sta, Toast.LENGTH_SHORT).show();
-                ((Rightdatacontent) viewHolder).setDatabottom(data, rec_dis, cus_sta, receive_time,receive_date);
+                ((Rightdatacontent) viewHolder).setDatabottom(data, rec_name, cus_sta, receive_time, receive_date);
 
                 break;
 
@@ -119,9 +117,9 @@ public class AccountStatmentAdapterClass extends RecyclerView.Adapter {
             givedate = itemView.findViewById(R.id.amount_given_date);
         }
 
-        private void setData(String amount, String discription, String user_sta, String time, String date) {
+        private void setData(String amount, String name, String user_sta, String time, String date) {
             hometitle.setText(amount);
-            dis.setText(discription);
+            dis.setText(name);
             givetime.setText(user_sta + "");
             givedate.setText(date);
         }
@@ -144,9 +142,9 @@ public class AccountStatmentAdapterClass extends RecyclerView.Adapter {
 
         }
 
-        private void setDatabottom(String title, String received_discription, String cus_sta, String receive_time, String receive_date) {
+        private void setDatabottom(String title, String received_name, String cus_sta, String receive_time, String receive_date) {
             bottom_txt.setText(title);
-            res_Discription.setText(received_discription);
+            res_Discription.setText(received_name);
             receive_money_Time.setText(cus_sta + "");
             receive_money_date.setText(receive_date);
         }

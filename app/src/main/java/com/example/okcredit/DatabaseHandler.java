@@ -18,6 +18,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String Mobile_Number = "mobile_number";
     public static final String Give_Curren_Time = "give_current_time";
     public static final String Give_Curren_Date = "give_current_date";
+    public static final String Give_User_Name = "give_user_name";
 
 
     public static final String ALL_USER_TABLE = "allusertable";
@@ -33,7 +34,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CREATE_ACTIVITY_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + Given_Money + " INTEGER ," + Given_Discription + " TEXT,"
-                + Money_Status + " INTEGER," + User_Name + " TEXT," + Mobile_Number + " TEXT ," + Given_Time + " INTEGER , " + Give_Curren_Time + " TEXT , " + Give_Curren_Date + " TEXT " + " )";
+                + Money_Status + " INTEGER," + User_Name + " TEXT," + Mobile_Number + " TEXT ,"
+                + Given_Time + " INTEGER , " + Give_Curren_Time + " TEXT , "
+                + Give_Curren_Date + " TEXT, " + Give_User_Name + " TEXT " + " )";
+
+
         sqLiteDatabase.execSQL(CREATE_ACTIVITY_TABLE);
 
 

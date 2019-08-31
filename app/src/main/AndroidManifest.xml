@@ -15,9 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Language"
+            android:label="@string/title_activity_language"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".UpdatePasswordActivity"
             android:label="@string/title_activity_update_password"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OkCreditSecurity"
             android:label="@string/title_activity_ok_credit_security"
