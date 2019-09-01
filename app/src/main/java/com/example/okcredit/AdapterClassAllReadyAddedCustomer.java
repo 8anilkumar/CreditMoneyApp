@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +16,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<AdapterClassAllReadyAddedCustomer.ViewHolder> {
@@ -49,11 +49,10 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         final String name = modelClassForAddedCustomers.get(position).getName();
         String mobile = modelClassForAddedCustomers.get(position).getMobile_number();
-        String money = modelClassForAddedCustomers.get(position).getTotel_money();
-        String date = modelClassForAddedCustomers.get(position).getDay();
-        String img = modelClassForAddedCustomers.get(position).getUser_img();
-        // String number = modelClassForAddedCustomers.get(position).getMobile_number();
-        viewHolder.setData(name, mobile, money, date, img);
+        String time = modelClassForAddedCustomers.get(position).getTime();
+        String current_balence = modelClassForAddedCustomers.get(position).getTotel_money();
+        String image = modelClassForAddedCustomers.get(position).getImg();
+        viewHolder.setData(name, mobile, time, current_balence, image);
         viewHolder.contact_select_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,37 +75,37 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
 
         private TextView userIcon;
         private TextView username;
-        private TextView usermoney;
-        private TextView userstatus;
         private TextView user_number;
-        private TextView day;
+        private TextView time;
+        private TextView totel_money;
+        private ImageView sendIcon;
+
+
         public LinearLayout contact_select_layout;
         private WeakReference<DashbordlistnerClassInterface> listenerRef;
 
         public ViewHolder(@NonNull View itemView, DashbordlistnerClassInterface listener) {
             super(itemView);
             listenerRef = new WeakReference<>(listener);
-            userIcon = itemView.findViewById(R.id.img_contact_customer);
+
             username = itemView.findViewById(R.id.name);
-            usermoney = itemView.findViewById(R.id.money_status);
-            userstatus = itemView.findViewById(R.id.balence_text_status);
-            user_number = itemView.findViewById(R.id.number);
-            day = itemView.findViewById(R.id.date);
+            user_number = itemView.findViewById(R.id.mobile_number);
+            time = itemView.findViewById(R.id.time);
+            totel_money = itemView.findViewById(R.id.balence_status);
+            userIcon = itemView.findViewById(R.id.img_contact_customer);
+
             contact_select_layout = itemView.findViewById(R.id.contact_select);
             itemView.setOnClickListener(this);
             contact_select_layout.setOnClickListener(this);
 
         }
 
-        private void setData(String name, String number, String money, String current_day, String img) {
+        private void setData(String name, String number, String current_time, String current_balence, String image) {
             username.setText(name);
-            usermoney.setText(number);
-            userstatus.setText(money);
-            day.setText(current_day);
-            userIcon.setText(img);
-
-//            usermoney.setText(money);
-
+            user_number.setText(number);
+            time.setText(current_time);
+            totel_money.setText(current_balence);
+            userIcon.setText(image);
 
         }
 

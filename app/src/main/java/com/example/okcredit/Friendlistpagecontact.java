@@ -3,7 +3,6 @@ package com.example.okcredit;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,7 +21,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Friendlistpagecontact extends AppCompatActivity {
@@ -46,6 +47,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
     int customer_totel_amount = 0;
     String payment = "";
     String advance = "";
+    String current_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 Intent intent = new Intent(Friendlistpagecontact.this, GiveAmount.class);
                 intent.putExtra("number", mobileNumber);
                 intent.putExtra("name", username);
-                intent.putExtra("user", totel);
+
 //                Toast.makeText(Friendlistpagecontact.this, "user" + totel, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
@@ -100,7 +102,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 Intent intent = new Intent(Friendlistpagecontact.this, RecieveAmountPage.class);
                 intent.putExtra("number", mobileNumber);
                 intent.putExtra("name", username);
-                intent.putExtra("receiver", user_totel);
+
 //                Toast.makeText(Friendlistpagecontact.this, "customer" + user_totel, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
@@ -143,25 +145,13 @@ public class Friendlistpagecontact extends AppCompatActivity {
                     customer_totel_amount = customer_totel_amount + count;
                 }
                 if (user_totel_amount > customer_totel_amount) {
-
                     payment = String.valueOf(user_totel_amount - customer_totel_amount);
                     totel = payment + " Due";
-                    SharedPreferences sharedPreferences = getSharedPreferences("USER_AMOUNT", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("TOTEL", String.valueOf(totel));
-                    editor.commit();
-                    //  insertTotel( totel);
+
 
                 } else {
-
                     advance = String.valueOf(customer_totel_amount - user_totel_amount);
                     totel = advance + " Advance";
-                    SharedPreferences sharedPreferences = getSharedPreferences("USER_AMOUNT", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("TOTEL", String.valueOf(totel));
-                    editor.commit();
-
-                    // insertTotelData( totel);
                 }
 
                 ModelClass modelClass = new ModelClass(amount, discription, paymenttype, user_num, totel, time);
@@ -171,6 +161,24 @@ public class Friendlistpagecontact extends AppCompatActivity {
             }
             while (cursor.moveToNext());
 
+            if (user_totel_amount > customer_totel_amount) {
+                payment = String.valueOf(user_totel_amount - customer_totel_amount);
+                totel = payment + " Due";
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+                current_time = simpleDateFormat.format(calendar.getTime());
+                insertTotel(username, mobileNumber, current_time, totel);
+
+
+            } else {
+                advance = String.valueOf(customer_totel_amount - user_totel_amount);
+                totel = advance + " Advance";
+
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+                current_time = simpleDateFormat.format(calendar.getTime());
+                insertTotelData(username, mobileNumber, current_time, totel);
+            }
 
             CastumerAdapter adapter = new CastumerAdapter(modelClasses);
             recyclerView.setAdapter(adapter);
@@ -203,19 +211,25 @@ public class Friendlistpagecontact extends AppCompatActivity {
 
     }
 
-    private void insertTotelData(String totel) {
+    private void insertTotelData(String username, String mobileNumber, String current_time, String totel) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseHandler.Totel_Money, totel);
+        contentValues.put(DatabaseHandler.User_Name, username);
+        contentValues.put(DatabaseHandler.Mobile_Number, mobileNumber);
+        contentValues.put(DatabaseHandler.Current_Day, current_time);
+        contentValues.put(DatabaseHandler.Current_Balence, totel);
         long id = db.insert(DatabaseHandler.ALL_USER_TABLE, null, contentValues);
         Log.e("Result", id + "");
 
     }
 
-    private void insertTotel(String totel) {
+    private void insertTotel(String username, String mobileNumber, String current_time, String totel) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseHandler.Totel_Money, totel);
+        contentValues.put(DatabaseHandler.User_Name, username);
+        contentValues.put(DatabaseHandler.Mobile_Number, mobileNumber);
+        contentValues.put(DatabaseHandler.Current_Day, current_time);
+        contentValues.put(DatabaseHandler.Current_Balence, totel);
         long id = db.insert(DatabaseHandler.ALL_USER_TABLE, null, contentValues);
         Log.e("Result", id + "");
     }

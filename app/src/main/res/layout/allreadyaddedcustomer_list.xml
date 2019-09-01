@@ -44,13 +44,13 @@
                 android:orientation="horizontal">
                 <ImageView
                     android:layout_marginTop="5dp"
-                    android:id="@+id/status"
+                    android:id="@+id/sendIcons"
                     android:src="@drawable/ic_done_all_black_24dp"
                     android:layout_width="20dp"
                     android:layout_height="20dp" />
 
                 <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -67,7 +67,7 @@
             <TextView
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="5dp"
-                android:id="@+id/money_status"
+                android:id="@+id/mobile_number"
                 android:gravity="right"
                 android:text="mobile"
                 android:layout_gravity="right"
@@ -79,7 +79,7 @@
             <TextView
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:id="@+id/balence_text_status"
+                android:id="@+id/balence_status"
                 android:gravity="right"
                 android:layout_gravity="right"
                 android:textSize="18dp"

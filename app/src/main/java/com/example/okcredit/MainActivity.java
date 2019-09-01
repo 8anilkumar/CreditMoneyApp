@@ -1,6 +1,5 @@
 package com.example.okcredit;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -111,10 +110,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        final SharedPreferences sharedPreferences1 = getSharedPreferences("USER_AMOUNT", Context.MODE_PRIVATE);
-        final String user = sharedPreferences1.getString("TOTEL", "DEFAULT_NAME");
-
-
         recyclerView = findViewById(R.id.added_customer);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
@@ -126,19 +121,19 @@ public class MainActivity extends AppCompatActivity
         sqLiteDatabase = openHelper.getReadableDatabase();
         String srtcount = "";
          int rows = 0;
-         
+        String current_balenc = "";
 
         cursor = openHelper.getAllUserData();
         if (cursor.moveToFirst()) {
             do {
-                //String totel_money="";
+
                 String name = cursor.getString(0);
-                String status = cursor.getString(1);
-                String totel_money = cursor.getString(2);
-                String phone = cursor.getString(3);
-                String day = cursor.getString(4);
+                String phone = cursor.getString(1);
+                String time = cursor.getString(2);
+                current_balenc = cursor.getString(3);
                 String user_img = name.charAt(0) + "";
-                ModelClassForAddedCustomer contacts = new ModelClassForAddedCustomer(name, status, user, phone, day, user_img);
+
+                ModelClassForAddedCustomer contacts = new ModelClassForAddedCustomer(name, phone, time, current_balenc, user_img);
                 modelClassForAddedCustomers.add(contacts);
                 rows = cursor.getCount();
 
@@ -170,11 +165,6 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("TOTEL_USER", String.valueOf(rows));
         editor.commit();
-//
-//        Toast.makeText(this, "totel user"+rows, Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(MainActivity.this,HomePageActivity.class);
-//        intent.putExtra("totel_customer",rows);
-//        startActivity(intent);
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

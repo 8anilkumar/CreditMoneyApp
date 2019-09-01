@@ -3,22 +3,21 @@ package com.example.okcredit;
 import java.util.List;
 
 public class ModelClassForAddedCustomer {
-    private String user_img;
+
     private String name;
-    private String status;
-    private String totel_money;
     private String mobile_number;
-    private String day;
+    private String time;
+    private String totel_money;
+    private String img;
 
 
-    public ModelClassForAddedCustomer(String name, String status, String totel_money, String mobile_number, String day, String user_img) {
+    public ModelClassForAddedCustomer(String name, String mobile_number, String time, String totel_money, String user_img) {
 
         this.name = name;
-        this.status = status;
         this.totel_money = totel_money;
         this.mobile_number = mobile_number;
-        this.day = day;
-        this.user_img = user_img;
+        this.time = time;
+        this.img = user_img;
 
 
     }
@@ -26,20 +25,12 @@ public class ModelClassForAddedCustomer {
     public ModelClassForAddedCustomer(List<ModelClassForAddedCustomer> modelClassForAddedCustomers) {
     }
 
-    public String getUser_img() {
-        return user_img;
+    public String getImg() {
+        return img;
     }
 
-    public void setUser_img(String user_img) {
-        this.user_img = user_img;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getName() {
@@ -50,12 +41,20 @@ public class ModelClassForAddedCustomer {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
+    public String getMobile_number() {
+        return mobile_number;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setMobile_number(String mobile_number) {
+        this.mobile_number = mobile_number;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getTotel_money() {
@@ -65,15 +64,4 @@ public class ModelClassForAddedCustomer {
     public void setTotel_money(String totel_money) {
         this.totel_money = totel_money;
     }
-
-    public String getMobile_number() {
-        return mobile_number;
-    }
-
-    public void setMobile_number(String mobile_number) {
-        this.mobile_number = mobile_number;
-    }
-
-
-
 }

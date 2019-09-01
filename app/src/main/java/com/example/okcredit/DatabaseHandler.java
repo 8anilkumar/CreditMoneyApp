@@ -25,6 +25,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String Totel_Money = "totel_money";
     public static final String Status = "status";
     public static final String Current_Day = "current_day";
+    public static final String Current_Balence = "current_banence";
+
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -43,7 +45,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
         String CREATE_ALL_USER_ACTIVITY = "CREATE TABLE " + ALL_USER_TABLE + "(" + User_Name + " TEXT,"
-                + Status + " TEXT," + Totel_Money + " INTEGER," + Mobile_Number + " TEXT ," + Current_Day + " TEXT " + ")";
+                + Mobile_Number + " TEXT ," + Current_Day + " TEXT, " + Current_Balence + " TEXT " + ")";
+
         sqLiteDatabase.execSQL(CREATE_ALL_USER_ACTIVITY);
     }
 
