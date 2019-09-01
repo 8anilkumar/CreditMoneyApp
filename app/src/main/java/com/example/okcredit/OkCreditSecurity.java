@@ -2,6 +2,8 @@ package com.example.okcredit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OkCreditSecurity extends AppCompatActivity {
-
+    ImageView imgback;
     RecyclerView recyclerView;
 
     @Override
@@ -22,6 +24,14 @@ public class OkCreditSecurity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        imgback = findViewById(R.id.back);
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OkCreditSecurity.this, HomePageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         recyclerView = findViewById(R.id.security_okcredit);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

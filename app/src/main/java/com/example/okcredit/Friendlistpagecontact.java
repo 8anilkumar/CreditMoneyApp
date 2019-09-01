@@ -126,6 +126,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
         int paymenttype = 0;
         String time = "";
         String date = "";
+
         if (cursor.moveToFirst()) {
             do {
                 String amount;
@@ -160,6 +161,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
 
             }
             while (cursor.moveToNext());
+
 
             if (user_totel_amount > customer_totel_amount) {
                 payment = String.valueOf(user_totel_amount - customer_totel_amount);
@@ -211,7 +213,8 @@ public class Friendlistpagecontact extends AppCompatActivity {
 
     }
 
-    private void insertTotelData(String username, String mobileNumber, String current_time, String totel) {
+    private void insertTotelData(String username, String mobileNumber, String
+            current_time, String totel) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHandler.User_Name, username);
@@ -222,6 +225,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
         Log.e("Result", id + "");
 
     }
+
 
     private void insertTotel(String username, String mobileNumber, String current_time, String totel) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
@@ -234,6 +238,5 @@ public class Friendlistpagecontact extends AppCompatActivity {
         Log.e("Result", id + "");
     }
 }
-
 
 

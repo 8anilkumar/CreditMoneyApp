@@ -1,6 +1,9 @@
 package com.example.okcredit;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,6 +15,7 @@ import java.util.List;
 
 public class Language extends AppCompatActivity {
 
+    ImageView imgback;
     RecyclerView recyclerView;
 
     @Override
@@ -20,7 +24,14 @@ public class Language extends AppCompatActivity {
         setContentView(R.layout.activity_language);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        imgback = findViewById(R.id.back);
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Language.this, HomePageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         recyclerView = findViewById(R.id.language);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

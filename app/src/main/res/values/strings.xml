@@ -36,4 +36,6 @@
     <string name="title_activity_ok_credit_security">OkCreditSecurity</string>
     <string name="title_activity_update_password">UpdatePasswordActivity</string>
     <string name="title_activity_language">Language</string>
+    <string name="title_activity_user_profile">UserProfile</string>
+    <string name="title_activity_reminder_setting">ReminderSetting</string>
 </resources>

@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class HomePageActivity extends AppCompatActivity {
     String amount;
     String allTransaction = "";
     int totel_transaction = 0;
+    ImageView imgback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,15 @@ public class HomePageActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         totel = findViewById(R.id.user);
+
+        imgback = findViewById(R.id.back);
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         final SharedPreferences sharedPreferences = getSharedPreferences("USER_CREDENTIALS", Context.MODE_PRIVATE);
         final String user = sharedPreferences.getString("TOTEL_USER", "DEFAULT_NAME");
@@ -85,6 +97,16 @@ public class HomePageActivity extends AppCompatActivity {
                 }
                 if (position == 4) {
                     Intent intent = new Intent(HomePageActivity.this, OkCreditSecurity.class);
+                    Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }
+                if (position == 5) {
+                    Intent intent = new Intent(HomePageActivity.this, UserProfile.class);
+                    Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }
+                if (position == 7) {
+                    Intent intent = new Intent(HomePageActivity.this, ReminderSetting.class);
                     Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
