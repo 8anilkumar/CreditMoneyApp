@@ -26,8 +26,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static android.hardware.camera2.params.BlackLevelPattern.COUNT;
+import static android.icu.text.MessagePattern.ArgType.SELECT;
+import static com.example.okcredit.DatabaseHandler.ALL_USER_TABLE;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,7 +51,11 @@ public class MainActivity extends AppCompatActivity
     ProgressBar progressBar;
     private int progressStatus = 0;
     private Handler handler = new Handler();
+    ImageView user_image;
+    TextView name_user;
+    String name = "";
 
+    private String[] mArrayNames = new String[]{};
 
 
     @Override
@@ -54,6 +64,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
 
         number = findViewById(R.id.number);
@@ -89,7 +100,22 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
+        user_image = (ImageView) findViewById(R.id.user_img_pro);
+        name_user = (TextView) findViewById(R.id.name);
+        user_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UserProfile.class);
+                startActivity(intent);
+            }
+        });
+        name_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UserProfile.class);
+                startActivity(intent);
+            }
+        });
 
         home_btn = findViewById(R.id.navigation_home);
         home_btn.setOnClickListener(new View.OnClickListener() {
@@ -127,13 +153,14 @@ public class MainActivity extends AppCompatActivity
         if (cursor.moveToFirst()) {
             do {
 
-                String name = cursor.getString(0);
+                name = cursor.getString(0);
                 String phone = cursor.getString(1);
                 String time = cursor.getString(2);
                 current_balenc = cursor.getString(3);
                 String user_img = name.charAt(0) + "";
 
                 ModelClassForAddedCustomer contacts = new ModelClassForAddedCustomer(name, phone, time, current_balenc, user_img);
+
                 modelClassForAddedCustomers.add(contacts);
                 rows = cursor.getCount();
 
@@ -142,6 +169,7 @@ public class MainActivity extends AppCompatActivity
             while (cursor.moveToNext());
 
         }
+
 
         AdapterClassAllReadyAddedCustomer adapter = new AdapterClassAllReadyAddedCustomer(modelClassForAddedCustomers, new DashbordlistnerClassInterface() {
             @Override
@@ -158,7 +186,6 @@ public class MainActivity extends AppCompatActivity
         });
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
 
 
         SharedPreferences sharedPreferences = getSharedPreferences("USER_CREDENTIALS", MODE_PRIVATE);
@@ -201,11 +228,14 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_name) {
+
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

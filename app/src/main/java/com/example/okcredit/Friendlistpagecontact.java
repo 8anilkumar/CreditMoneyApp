@@ -26,12 +26,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.example.okcredit.DatabaseHandler.ALL_USER_TABLE;
+
 public class Friendlistpagecontact extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView txtmoney;
     TextView txtrecieve_money;
     TextView status;
-    Button conferm, conferm_amount_recieve;
     Button give_payment, accept_payment;
     DatabaseHandler openHelper;
     SQLiteDatabase sqLiteDatabase;
@@ -77,11 +78,8 @@ public class Friendlistpagecontact extends AppCompatActivity {
         username = intent.getStringExtra("name");
         mobileNumber = intent.getStringExtra("mobile");
         userstatus = intent.getIntExtra("new", 0);
-
-
         user_name.setText(username);
         user_number.setText(mobileNumber);
-
 
         give_payment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,12 +87,9 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 Intent intent = new Intent(Friendlistpagecontact.this, GiveAmount.class);
                 intent.putExtra("number", mobileNumber);
                 intent.putExtra("name", username);
-
-//                Toast.makeText(Friendlistpagecontact.this, "user" + totel, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
-
 
         accept_payment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,20 +97,14 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 Intent intent = new Intent(Friendlistpagecontact.this, RecieveAmountPage.class);
                 intent.putExtra("number", mobileNumber);
                 intent.putExtra("name", username);
-
-//                Toast.makeText(Friendlistpagecontact.this, "customer" + user_totel, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
         txtmoney = findViewById(R.id.txtgive);
         txtrecieve_money = findViewById(R.id.acc_payment);
-//        conferm = (Button) findViewById(R.id.conferm_amount);
-//        conferm_amount_recieve = (Button) findViewById(R.id.conferm_amount_recieve);
-
         recyclerView = findViewById(R.id.chat_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
-
         recyclerView.setLayoutManager(layoutManager);
         List<ModelClass> modelClasses = new ArrayList<>();
 
@@ -162,33 +151,55 @@ public class Friendlistpagecontact extends AppCompatActivity {
             }
             while (cursor.moveToNext());
 
-
-            if (user_totel_amount > customer_totel_amount) {
-                payment = String.valueOf(user_totel_amount - customer_totel_amount);
-                totel = payment + " Due";
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
-                current_time = simpleDateFormat.format(calendar.getTime());
-                insertTotel(username, mobileNumber, current_time, totel);
-
-
-            } else {
-                advance = String.valueOf(customer_totel_amount - user_totel_amount);
-                totel = advance + " Advance";
-
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
-                current_time = simpleDateFormat.format(calendar.getTime());
-                insertTotelData(username, mobileNumber, current_time, totel);
-            }
-
             CastumerAdapter adapter = new CastumerAdapter(modelClasses);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 
         }
 
+        String str = "";
+        String user_no = "";
+        cursor = openHelper.getAllUserData();
 
+
+        if (cursor.moveToFirst()) {
+            do {
+                user_no = cursor.getString(1);
+                str = user_no + user_no;
+                if (mobileNumber.equals(user_no)) {
+
+                    updateDate(totel);
+                    Toast.makeText(this, "Already exsist", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Not Working", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            while (cursor.moveToNext());
+        } else {
+
+            if (user_totel_amount > customer_totel_amount) {
+                payment = String.valueOf(user_totel_amount - customer_totel_amount);
+                totel = payment + " Due";
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM-dd-yyyy");
+                current_time = simpleDateFormat.format(calendar.getTime());
+                insertTotel(username, mobileNumber, current_time, totel);
+                Toast.makeText(this, "New User Data" + str, Toast.LENGTH_SHORT).show();
+
+            } else {
+                advance = String.valueOf(customer_totel_amount - user_totel_amount);
+                totel = advance + " Advance";
+
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM-dd-yyyy");
+                current_time = simpleDateFormat.format(calendar.getTime());
+                insertTotelData(username, mobileNumber, current_time, totel);
+                Toast.makeText(this, "New User Amount" + str, Toast.LENGTH_SHORT).show();
+            }
+
+        }
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -210,22 +221,18 @@ public class Friendlistpagecontact extends AppCompatActivity {
                 ActivityCompat.requestPermissions(Friendlistpagecontact.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
             }
         });
-
     }
 
-    private void insertTotelData(String username, String mobileNumber, String
-            current_time, String totel) {
+    private void insertTotelData(String username, String mobileNumber, String current_time, String totel) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHandler.User_Name, username);
         contentValues.put(DatabaseHandler.Mobile_Number, mobileNumber);
         contentValues.put(DatabaseHandler.Current_Day, current_time);
         contentValues.put(DatabaseHandler.Current_Balence, totel);
-        long id = db.insert(DatabaseHandler.ALL_USER_TABLE, null, contentValues);
+        long id = db.insert(ALL_USER_TABLE, null, contentValues);
         Log.e("Result", id + "");
-
     }
-
 
     private void insertTotel(String username, String mobileNumber, String current_time, String totel) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
@@ -234,8 +241,18 @@ public class Friendlistpagecontact extends AppCompatActivity {
         contentValues.put(DatabaseHandler.Mobile_Number, mobileNumber);
         contentValues.put(DatabaseHandler.Current_Day, current_time);
         contentValues.put(DatabaseHandler.Current_Balence, totel);
-        long id = db.insert(DatabaseHandler.ALL_USER_TABLE, null, contentValues);
+        long id = db.insert(ALL_USER_TABLE, null, contentValues);
         Log.e("Result", id + "");
+    }
+
+    private boolean updateDate(String amount) {
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHandler.Current_Balence, amount);
+        String number = mobileNumber;
+        return db.update(DatabaseHandler.ALL_USER_TABLE, contentValues, DatabaseHandler.Mobile_Number + "=?", new String[]{number}) > 0;
+
+
     }
 }
 

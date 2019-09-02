@@ -145,10 +145,10 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View view) {
             if (view.getId() == linearLayout.getId()) {
-                Toast.makeText(view.getContext(), "ITEM PRESSED = " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+
 
             } else {
-                Toast.makeText(view.getContext(), "ITEM PRESSED = " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+
 
             }
             listenerRef.get().onPositionClicked(getAdapterPosition());

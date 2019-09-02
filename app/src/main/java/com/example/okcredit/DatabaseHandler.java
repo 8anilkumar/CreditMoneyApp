@@ -70,6 +70,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return mobile;
     }
 
+
     public Cursor getAllUserData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor result = db.rawQuery("Select * From " + ALL_USER_TABLE, null);

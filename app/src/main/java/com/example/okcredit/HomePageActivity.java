@@ -86,33 +86,38 @@ public class HomePageActivity extends AppCompatActivity {
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_business_black_24dp, "Profile"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_account_balance_wallet_black, "Collection"));
         homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_access_alarm_black, "Reminders"));
-        homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_language_black_24dp, "Language"));
+        homepageModelClasses.add(new HomepageModelClass(HOME_PAGE_BOTTOM_SETTING, R.drawable.ic_language_black_24dp, "Language                                         ENGLISH"));
         HomePageAdapter homePageAdapter = new HomePageAdapter(homepageModelClasses, new AccountStatmentInterface() {
             @Override
             public void onPositionClicked(int position) {
                 if (position == 2) {
                     Intent intent = new Intent(HomePageActivity.this, AccountStatment.class);
-                    Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
+
                     startActivity(intent);
                 }
                 if (position == 4) {
                     Intent intent = new Intent(HomePageActivity.this, OkCreditSecurity.class);
-                    Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
+
                     startActivity(intent);
                 }
                 if (position == 5) {
                     Intent intent = new Intent(HomePageActivity.this, UserProfile.class);
-                    Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
+
+                    startActivity(intent);
+                }
+                if (position == 6) {
+                    Intent intent = new Intent(HomePageActivity.this, CollectionMoneyActivity.class);
+
                     startActivity(intent);
                 }
                 if (position == 7) {
                     Intent intent = new Intent(HomePageActivity.this, ReminderSetting.class);
-                    Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
+
                     startActivity(intent);
                 }
                 if (position == 8) {
                     Intent intent = new Intent(HomePageActivity.this, Language.class);
-                    Toast.makeText(HomePageActivity.this, "item:" + position, Toast.LENGTH_SHORT).show();
+
                     startActivity(intent);
                 }
             }

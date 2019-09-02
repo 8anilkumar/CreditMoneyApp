@@ -24,20 +24,21 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/user_img_pro"
                     android:layout_gravity="center"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/ic_account_circle_22"/>
 
                 <TextView
-                    android:id="@+id/number"
+                    android:id="@+id/name"
                     android:textSize="15dp"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center"
                     android:textColor="#FFFFFF"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0000000000"/>
+                    android:text="Anil Kumar" />
 
                 <ImageView
                     android:id="@+id/navigation_home"

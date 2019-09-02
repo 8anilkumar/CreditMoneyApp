@@ -82,7 +82,7 @@
                 android:id="@+id/balence_status"
                 android:gravity="right"
                 android:layout_gravity="right"
-                android:textSize="18dp"
+                android:textSize="14dp"
                 android:text="\u20B9"
                 android:paddingRight="10dp"
                 android:layout_width="wrap_content"

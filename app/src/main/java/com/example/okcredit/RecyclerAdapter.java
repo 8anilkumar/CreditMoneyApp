@@ -69,7 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         list = cont.get(position);
-
+        String number = cont.get(position).getPhone();
         holder.name.setText(cont.get(position).getName());
         holder.phone.setText(cont.get(position).getPhone());
         holder.imageView.setImageResource(list.getImgURL());
@@ -81,6 +81,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 //                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
 //                String current_time = simpleDateFormat.format(calendar.getTime());
 //                insertData(cont.get(position).getName(),  cont.get(position).getPhone(),current_time);
+                // if()
 
                 Toast.makeText(view.getContext(), "row selected  " + cont.get(position).getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(view.getContext(), Payment_Account_Data.class);
