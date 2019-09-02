@@ -41,7 +41,7 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
-        return new AdapterClassAllReadyAddedCustomer.ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.allreadyaddedcustomer_list, viewGroup, false), dashbordlistnerClassInterface);
+        return new AdapterClassAllReadyAddedCustomer.ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.allreadyaddedcustomer_list, viewGroup, false), (DashbordlistnerClassInterface) dashbordlistnerClassInterface);
 
     }
 
@@ -78,7 +78,6 @@ public class AdapterClassAllReadyAddedCustomer extends RecyclerView.Adapter<Adap
         private TextView user_number;
         private TextView time;
         private TextView totel_money;
-        private ImageView sendIcon;
 
 
         public LinearLayout contact_select_layout;

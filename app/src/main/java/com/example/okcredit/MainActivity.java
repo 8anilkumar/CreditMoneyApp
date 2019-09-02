@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
     ImageView user_image;
     TextView name_user;
     String name = "";
-
+    String phone = "";
     private String[] mArrayNames = new String[]{};
 
 
@@ -154,13 +154,11 @@ public class MainActivity extends AppCompatActivity
             do {
 
                 name = cursor.getString(0);
-                String phone = cursor.getString(1);
+                phone = cursor.getString(1);
                 String time = cursor.getString(2);
                 current_balenc = cursor.getString(3);
                 String user_img = name.charAt(0) + "";
-
                 ModelClassForAddedCustomer contacts = new ModelClassForAddedCustomer(name, phone, time, current_balenc, user_img);
-
                 modelClassForAddedCustomers.add(contacts);
                 rows = cursor.getCount();
 
@@ -176,6 +174,10 @@ public class MainActivity extends AppCompatActivity
             public void onPositionClicked(int position) {
 
                 Intent intent = new Intent(MainActivity.this, Friendlistpagecontact.class);
+                intent.putExtra("mobile", phone);
+                Toast.makeText(MainActivity.this, "number is " + phone, Toast.LENGTH_SHORT).show();
+                intent.putExtra("name", name);
+                Toast.makeText(MainActivity.this, "name" + name, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
 

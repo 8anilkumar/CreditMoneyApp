@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -108,6 +109,7 @@ public class Friendlistpagecontact extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         List<ModelClass> modelClasses = new ArrayList<>();
 
+
         openHelper = new DatabaseHandler(getApplicationContext());
         sqLiteDatabase = openHelper.getReadableDatabase();
         //cursor = openHelper.getAllData();
@@ -157,48 +159,28 @@ public class Friendlistpagecontact extends AppCompatActivity {
 
         }
 
-        String str = "";
+        String user = "";
         String user_no = "";
         cursor = openHelper.getAllUserData();
-
-
         if (cursor.moveToFirst()) {
+
             do {
+                user = cursor.getString(0);
                 user_no = cursor.getString(1);
-                str = user_no + user_no;
-                if (mobileNumber.equals(user_no)) {
-
-                    updateDate(totel);
-                    Toast.makeText(this, "Already exsist", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Not Working", Toast.LENGTH_SHORT).show();
-                }
-
             }
-
             while (cursor.moveToNext());
-        } else {
+        }
 
-            if (user_totel_amount > customer_totel_amount) {
-                payment = String.valueOf(user_totel_amount - customer_totel_amount);
-                totel = payment + " Due";
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM-dd-yyyy");
-                current_time = simpleDateFormat.format(calendar.getTime());
-                insertTotel(username, mobileNumber, current_time, totel);
-                Toast.makeText(this, "New User Data" + str, Toast.LENGTH_SHORT).show();
-
+        if (mobileNumber.equals(user_no) && username.equals(user)) {
+            updateDate(totel);
+            Toast.makeText(this, "Already exsist", Toast.LENGTH_SHORT).show();
             } else {
-                advance = String.valueOf(customer_totel_amount - user_totel_amount);
-                totel = advance + " Advance";
 
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM-dd-yyyy");
-                current_time = simpleDateFormat.format(calendar.getTime());
-                insertTotelData(username, mobileNumber, current_time, totel);
-                Toast.makeText(this, "New User Amount" + str, Toast.LENGTH_SHORT).show();
-            }
-
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM-dd-yyyy");
+            current_time = simpleDateFormat.format(calendar.getTime());
+            insertTotel(username, mobileNumber, current_time, totel);
+            Toast.makeText(this, "New User insert", Toast.LENGTH_SHORT).show();
         }
         call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,16 +205,16 @@ public class Friendlistpagecontact extends AppCompatActivity {
         });
     }
 
-    private void insertTotelData(String username, String mobileNumber, String current_time, String totel) {
-        SQLiteDatabase db = openHelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseHandler.User_Name, username);
-        contentValues.put(DatabaseHandler.Mobile_Number, mobileNumber);
-        contentValues.put(DatabaseHandler.Current_Day, current_time);
-        contentValues.put(DatabaseHandler.Current_Balence, totel);
-        long id = db.insert(ALL_USER_TABLE, null, contentValues);
-        Log.e("Result", id + "");
-    }
+//    private void insertTotelData(String username, String mobileNumber, String current_time, String totel) {
+//        SQLiteDatabase db = openHelper.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(DatabaseHandler.User_Name, username);
+//        contentValues.put(DatabaseHandler.Mobile_Number, mobileNumber);
+//        contentValues.put(DatabaseHandler.Current_Day, current_time);
+//        contentValues.put(DatabaseHandler.Current_Balence, totel);
+//        long id = db.insert(ALL_USER_TABLE, null, contentValues);
+//        Log.e("Result", id + "");
+//    }
 
     private void insertTotel(String username, String mobileNumber, String current_time, String totel) {
         SQLiteDatabase db = openHelper.getWritableDatabase();
